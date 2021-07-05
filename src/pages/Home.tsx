@@ -48,7 +48,6 @@ export default function Home() {
   };
 
   async function fetchData() {
-    console.log(process.env.REACT_APP_API_URL);
     const userRequestURL = `${process.env.REACT_APP_API_URL}?nome=CN=Vinicius%20Machado/OU=Coffee/OU=NovaVenecia/OU=LDCBrazil/O=LouisDreyfus`;
     console.log(userRequestURL);
     const data = await (await fetch(userRequestURL)).json();
@@ -107,7 +106,7 @@ export default function Home() {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <Typography component="div">{children}</Typography>
           </Box>
         )}
       </div>
