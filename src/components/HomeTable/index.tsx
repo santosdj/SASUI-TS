@@ -7,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import { RequestType } from '../../hooks/useRequestTable';
-//import { EnhancedTableToolbar } from './TableToolBar';
 import { EnhancedTableHead } from '../Table/TableHead';
 import { useStyles } from '../Table/useTableStyles';
 import { Order, TableProps } from '../Table/useTableProps';

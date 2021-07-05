@@ -15,7 +15,6 @@ import { EnhancedTableHead } from './TableHead';
 import { useStyles } from './useTableStyles';
 import { Order, TableProps } from './useTableProps';
 import { useHistory } from 'react-router-dom';
-import { parseISO, format } from 'date-fns';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {

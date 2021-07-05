@@ -9,10 +9,8 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import ControlCameraIcon from '@material-ui/icons/ControlCamera';
-import SvgIcon from '@material-ui/icons/ExpandLess';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +47,7 @@ export default function MenuSAP() {
       <ListItem button onClick={handleClick}>
         <ListItemIcon color="primary">
           <span>
-            <img src={sapicon} />
+            <img src={sapicon} alt="Menu SAP" />
           </span>
         </ListItemIcon>
         <ListItemText primary="" />

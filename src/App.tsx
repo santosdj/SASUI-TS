@@ -5,7 +5,6 @@ import RequestNew from './pages/RequestNew';
 import Request from './pages/Request';
 import Requests from './pages/Requests';
 import RequestsAuthor from './pages/RequestsAuthor';
-import DataGridDemo from './pages/RequestsGrid';
 import Layout from './components/Layout/Layout';
 
 function App() {

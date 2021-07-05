@@ -48,8 +48,9 @@ export default function Home() {
   };
 
   async function fetchData() {
-    const userRequestURL =
-      'http://localhost:3010/requests?nome=CN=Vinicius%20Machado/OU=Coffee/OU=NovaVenecia/OU=LDCBrazil/O=LouisDreyfus';
+    console.log(process.env.REACT_APP_API_URL);
+    const userRequestURL = `${process.env.REACT_APP_API_URL}?nome=CN=Vinicius%20Machado/OU=Coffee/OU=NovaVenecia/OU=LDCBrazil/O=LouisDreyfus`;
+    console.log(userRequestURL);
     const data = await (await fetch(userRequestURL)).json();
 
     setUserRequest(

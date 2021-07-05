@@ -13,7 +13,7 @@ export default function Requests() {
   const headCells = useRequestTable(params.orderby);
 
   async function fetchData() {
-    const data = await (await fetch('http://localhost:3010/requests')).json();
+    const data = await (await fetch(`${process.env.REACT_APP_API_URL}`)).json();
     setRequests(data);
   }
 
