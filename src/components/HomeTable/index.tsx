@@ -1,17 +1,18 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+  Checkbox,
+} from '@material-ui/core';
 import { RequestType } from '../../hooks/useRequestTable';
 import { EnhancedTableHead } from '../Table/TableHead';
 import { useStyles } from '../Table/useTableStyles';
 import { Order, TableProps } from '../Table/useTableProps';
 import { useHistory } from 'react-router-dom';
-import { parseISO, format } from 'date-fns';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {

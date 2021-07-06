@@ -1,12 +1,14 @@
 import React from 'react';
 import { RequestType } from '../../hooks/useRequestTable';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
-import Checkbox from '@material-ui/core/Checkbox';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TableHead,
+  Checkbox,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 export type TableProps = {

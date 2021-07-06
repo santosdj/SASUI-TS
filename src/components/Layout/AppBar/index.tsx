@@ -1,21 +1,25 @@
 import React from 'react';
 import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import {
+  Drawer,
+  AppBar,
+  Toolbar,
+  Typography,
+  Divider,
+  Avatar,
+  Menu,
+  MenuItem,
+  Badge,
+  InputBase,
+} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import { Avatar, Menu, MenuItem } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Badge from '@material-ui/core/Badge';
-import InputBase from '@material-ui/core/InputBase';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useLayout } from '../useLayout';
 import { Fragment } from 'react';

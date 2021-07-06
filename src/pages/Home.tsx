@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import {
+  Tabs,
+  Tab,
+  Paper,
+  makeStyles,
+  Box,
+  Typography,
+} from '@material-ui/core';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import { Box, Typography } from '@material-ui/core';
 import UserDraftRequests from '../components/Home/UserDraftRequests';
 import UserOpenRequests from '../components/Home/UserOpenRequests';
 import UserClosedRequests from '../components/Home/UserClosedRequests';
