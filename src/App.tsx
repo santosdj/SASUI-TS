@@ -1,10 +1,12 @@
 import { Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import RequestNew from './pages/RequestNew';
-import Request from './pages/Request';
-import Requests from './pages/Requests';
-import RequestsAuthor from './pages/RequestsAuthor';
+import {
+  Home,
+  RequestNew,
+  Request,
+  Requests,
+  RequestsAuthor,
+} from './pages/index';
 import Layout from './components/Layout/Layout';
 
 function App() {

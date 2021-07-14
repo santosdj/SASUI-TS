@@ -7,7 +7,7 @@ type RequestsParams = {
   orderby: string;
 };
 
-export default function Requests() {
+export function Requests() {
   const params = useParams<RequestsParams>();
   const [requests, setRequests] = useState<RequestType[]>([]);
   const headCells = useRequestTable(params.orderby);

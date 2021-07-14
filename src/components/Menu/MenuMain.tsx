@@ -34,7 +34,7 @@ export default function MenuMain() {
         <ListItemText primary="Home"></ListItemText>
       </ListItem>
 
-      <ListItem button key="Nova" component={Link} to="/requests/new">
+      <ListItem button key="Nova" component={Link} to="/request/new">
         <ListItemIcon>
           <AddCircleIcon color="primary" />
         </ListItemIcon>

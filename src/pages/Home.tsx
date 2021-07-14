@@ -19,6 +19,7 @@ import UserAprovalRequests from '../components/Home/UserAprovalRequests';
 import UserTodoRequests from '../components/Home/UserTodoRequests';
 import { RequestType } from '../hooks/useRequestTable';
 
+import { useAuth } from '../hooks/useAuth';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
@@ -31,7 +32,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Home() {
+export function Home() {
+  const { accountInfo } = useAuth();
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
   const [userRequest, setUserRequest] = React.useState<RequestType[]>([]);

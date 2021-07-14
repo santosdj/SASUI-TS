@@ -11,6 +11,12 @@ import {
   MenuItem,
   Badge,
   InputBase,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
@@ -26,8 +32,10 @@ import { Fragment } from 'react';
 import MenuMain from '../../Menu/MenuMain';
 import MenuSolicitacoes from '../../Menu/MenuSolicitacoes';
 import MenuSAP from '../../Menu/MenuSAP';
+import { useAuth } from '../../../hooks/useAuth';
 
 export default function MenuNavigator() {
+  const { accountInfo, signOut } = useAuth();
   const [open, setOpen] = React.useState(false);
   const { config, classes, theme } = useLayout();
 
@@ -63,6 +71,32 @@ export default function MenuNavigator() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const newMenu = (
+    <Card className={classes.cardSection}>
+      <CardActionArea>
+        <CardContent>
+          <Avatar
+            alt={accountInfo?.user.displayName}
+            src={accountInfo?.user.avatar}
+            className={classes.cardAvatar}
+          />
+          <div>
+            <div>{accountInfo?.user.displayName}</div>
+            <div>{accountInfo?.user.email}</div>
+          </div>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary" onClick={signOut}>
+          Sign Out
+        </Button>
+        <Button size="small" color="primary" onClick={handleMenuClose}>
+          Fechar
+        </Button>
+      </CardActions>
+    </Card>
+  );
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -73,12 +107,7 @@ export default function MenuNavigator() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        {config.accountmenu.profiletext}
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        {config.accountmenu.accounttext}
-      </MenuItem>
+      {newMenu}
     </Menu>
   );
 
@@ -179,8 +208,8 @@ export default function MenuNavigator() {
               color="inherit"
             >
               <Avatar
-                alt={config.accountmenu.avataralt}
-                src={config.accountmenu.avatar}
+                alt={accountInfo?.user.displayName}
+                src={accountInfo?.user.avatar}
               />
             </IconButton>
           </div>

@@ -5,6 +5,7 @@ import {
   createStyles,
   useTheme,
 } from '@material-ui/core/styles';
+import { CenterFocusStrong } from '@material-ui/icons';
 
 type AppConfigType = {
   accountmenu: {
@@ -139,6 +140,20 @@ export function useLayout(){
           width: '20ch',
         },
       },    
+      cardSection:{
+         minHeight: 140,
+         width:"100%",    
+      },
+      cardContent: {
+        display:"flex",
+        alignItems: 'center',
+      },
+      cardAvatar:{
+        display:"block",
+        width: 100,
+        height:100,      
+        margin:20 
+      },
       sectionDesktop: {
         display: 'none',
         [theme.breakpoints.up('md')]: {

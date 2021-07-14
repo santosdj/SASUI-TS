@@ -78,7 +78,7 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export default function DataGridDemo() {
+export function DataGridDemo() {
   function handleDoubleClick(params: GridCellParams, event: React.MouseEvent) {
     alert('ha');
   }

@@ -5,7 +5,7 @@ type RequestsParams = {
   status: string;
 };
 
-export default function RequestAuthor() {
+export function RequestsAuthor() {
   const params = useParams<RequestsParams>();
   return <div>Requests Author {params.status}</div>;
 }
