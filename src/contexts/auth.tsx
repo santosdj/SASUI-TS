@@ -45,9 +45,9 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
         scopes: loginRequest.scopes,
         prompt: 'select_account',
       });
-
+      console.log('Após o popup');
       await getUserProfile();
-      console.log('peguei o perfil');
+      console.log('peguei o perfil...retornando...');
     } catch (err) {
       setAccountInfo({
         isAuthenticated: false,
@@ -64,6 +64,7 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
 
   const getAccessToken = async (scopes: string[]) => {
     try {
+      console.log('Get access tokens');
       const accounts = msalInstance.getAllAccounts();
 
       if (accounts.length <= 0) throw new Error('Login required');
@@ -88,13 +89,14 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
 
   const getUserProfile = useCallback(async () => {
     try {
+      console.log('Pegando o access token...');
       const accessToken = await getAccessToken(loginRequest.scopes);
-
+      console.log('Pegou o access token...');
       if (accessToken) {
         const user = await getUserDetails(accessToken);
         console.log(user);
         localStorage.setItem('@AzureAd:accessToken', accessToken);
-
+        console.log('Setting account...');
         setAccountInfo({
           isAuthenticated: true,
           user: {
@@ -130,9 +132,10 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
 
   useEffect(() => {
     const accounts = msalInstance.getAllAccounts();
-
+    console.log('No use effect do context');
     if (accounts && accounts.length > 0) {
       getUserProfile();
+      console.log('Pegou o user profile no useEffect');
     }
   }, [getUserProfile]);
 
