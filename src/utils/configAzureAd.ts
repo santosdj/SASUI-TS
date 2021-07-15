@@ -3,9 +3,9 @@ import { Configuration } from "@azure/msal-browser";
 export const msalConfig : Configuration = {
   auth: {
     clientId: process.env.REACT_APP_CLIENT_ID  as string,
-    redirectUri:"http://localhost:3000/signin",
-    authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}`,
-    knownAuthorities: ["login.microsoftonline.com"],
+    redirectUri:process.env.REACT_APP_REDIRECT_URL,
+    authority: `https://${process.env.REACT_APP_KNOWNAUTHORITIES}/${process.env.REACT_APP_TENANT_ID}`,
+    knownAuthorities: [process.env.REACT_APP_KNOWNAUTHORITIES as string],
     postLogoutRedirectUri: "/",
   },
   cache: {
