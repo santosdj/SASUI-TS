@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
-export default function UserTodoRequests() {
+export default function UserTodoRequests(): JSX.Element {
   return <div>to be done</div>;
 }

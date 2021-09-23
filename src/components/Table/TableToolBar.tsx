@@ -1,16 +1,17 @@
-import clsx from 'clsx';
+import IconButton from "@material-ui/core/IconButton";
 import {
   createStyles,
   lighten,
   makeStyles,
   Theme,
-} from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+} from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import clsx from "clsx";
+import React from "react";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +20,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
       paddingRight: theme.spacing(1),
     },
     highlight:
-      theme.palette.type === 'light'
+      theme.palette.type === "light"
         ? {
             color: theme.palette.secondary.main,
             backgroundColor: lighten(theme.palette.secondary.light, 0.85),
@@ -29,17 +30,17 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
             backgroundColor: theme.palette.secondary.dark,
           },
     title: {
-      flex: '1 1 100%',
+      flex: "1 1 100%",
     },
   })
 );
 
-interface EnhancedTableToolbarProps {
+interface IEnhancedTableToolbarProps {
   numSelected: number;
   title: string;
 }
 
-export const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
+export const EnhancedTableToolbar = (props: IEnhancedTableToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected, title } = props;
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
 export function RequestNew() {
-  console.log('new request...');
+  console.log("new request...");
   return <div>Inclua uma nova Solicitação!</div>;
 }

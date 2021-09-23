@@ -1,18 +1,19 @@
-import { Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import Layout from "./components/Layout/Layout";
 import {
   Home,
   RequestNew,
   Request,
   Requests,
   RequestsAuthor,
-} from './pages/index';
-import Layout from './components/Layout/Layout';
+} from "./pages/index";
 
 function App() {
   return (
     <BrowserRouter>
-      <Fragment>
+      <>
         <Layout>
           <Switch>
             <Route path="/" exact component={Home} />
@@ -31,7 +32,7 @@ function App() {
             />
           </Switch>
         </Layout>
-      </Fragment>
+      </>
     </BrowserRouter>
   );
 }

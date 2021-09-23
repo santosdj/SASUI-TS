@@ -1,15 +1,18 @@
-import { Route, Redirect, RouteProps } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 
-interface PrivateRouteProps extends RouteProps {
+import { useAuth } from "../hooks/useAuth";
+
+interface IPrivateRouteProps extends RouteProps {
   // tslint:disable-next-line:no-any
   component: any;
 }
 
-const PrivateRoute = (props: PrivateRouteProps) => {
+const PrivateRoute = (props: IPrivateRouteProps) => {
   const { component: Component, location, ...rest } = props;
   const { accountInfo } = useAuth();
-  console.log('Private Route');
+  console.log("Private Route");
   console.log(accountInfo?.isAuthenticated);
 
   return (
@@ -21,7 +24,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/signin',
+              pathname: "/signin",
               state: { from: props.location },
             }}
           />

@@ -1,5 +1,3 @@
-import React from 'react';
-import clsx from 'clsx';
 import {
   Drawer,
   AppBar,
@@ -13,28 +11,29 @@ import {
   InputBase,
   Card,
   CardActionArea,
-  CardMedia,
   CardContent,
   CardActions,
   Button,
-} from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import { useLayout } from '../useLayout';
-import { Fragment } from 'react';
-import MenuMain from '../../Menu/MenuMain';
-import MenuSolicitacoes from '../../Menu/MenuSolicitacoes';
-import MenuSAP from '../../Menu/MenuSAP';
-import { useAuth } from '../../../hooks/useAuth';
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuIcon from "@material-ui/icons/Menu";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import SearchIcon from "@material-ui/icons/Search";
+import clsx from "clsx";
+import React, { Fragment } from "react";
 
-export default function MenuNavigator() {
+import { useAuth } from "../../../hooks/useAuth";
+import MenuMain from "../../Menu/MenuMain";
+import MenuSAP from "../../Menu/MenuSAP";
+import MenuSolicitacoes from "../../Menu/MenuSolicitacoes";
+import { useLayout } from "../useLayout";
+
+export default function MenuNavigator(): JSX.Element {
   const { accountInfo, signOut } = useAuth();
   const [open, setOpen] = React.useState(false);
   const { config, classes, theme } = useLayout();
@@ -100,10 +99,10 @@ export default function MenuNavigator() {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={config.accountmenu.desktopid}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -114,10 +113,10 @@ export default function MenuNavigator() {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={config.accountmenu.mobileid}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
@@ -143,7 +142,7 @@ export default function MenuNavigator() {
           aria-controls={config.accountmenu.desktopid}
           aria-haspopup="true"
           color="inherit"
-        ></IconButton>
+        />
         <AccountCircle />
         <p>{config.accountmenu.profiletext}</p>
       </MenuItem>
@@ -151,7 +150,7 @@ export default function MenuNavigator() {
   );
 
   return (
-    <Fragment>
+    <>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -184,7 +183,7 @@ export default function MenuNavigator() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
             />
           </div>
           <div className={classes.grow} />
@@ -244,7 +243,7 @@ export default function MenuNavigator() {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
+            {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
               <ChevronLeftIcon />
@@ -252,11 +251,11 @@ export default function MenuNavigator() {
           </IconButton>
         </div>
         <Divider />
-        <MenuMain></MenuMain>
+        <MenuMain />
         <Divider />
-        <MenuSolicitacoes></MenuSolicitacoes>
-        <MenuSAP></MenuSAP>
+        <MenuSolicitacoes />
+        <MenuSAP />
       </Drawer>
-    </Fragment>
+    </>
   );
 }

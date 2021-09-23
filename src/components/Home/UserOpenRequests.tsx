@@ -1,5 +1,3 @@
-import React from 'react';
-import { RequestType } from '../../hooks/useRequestTable';
 import {
   Table,
   TableBody,
@@ -8,15 +6,21 @@ import {
   TableRow,
   TableHead,
   Checkbox,
-} from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+} from "@material-ui/core";
+import React from "react";
+import { useHistory } from "react-router-dom";
+
+import { RequestType } from "../../hooks/useRequestTable";
 
 export type TableProps = {
   rows: RequestType[];
   title: string;
 };
 
-export default function UserOpenRequests({ rows, title }: TableProps) {
+export default function UserOpenRequests({
+  rows,
+  title,
+}: TableProps): JSX.Element {
   const history = useHistory();
   const [selected, setSelected] = React.useState<string[]>([]);
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
@@ -66,7 +70,7 @@ export default function UserOpenRequests({ rows, title }: TableProps) {
         <TableCell padding="checkbox">
           <Checkbox
             checked={isItemSelected}
-            inputProps={{ 'aria-labelledby': labelId }}
+            inputProps={{ "aria-labelledby": labelId }}
             onClick={(event) => {
               event.stopPropagation();
               handleClick(event, row.id);
@@ -76,7 +80,7 @@ export default function UserOpenRequests({ rows, title }: TableProps) {
         <TableCell component="th" id={labelId} scope="row" padding="none">
           {row.significadostatus}
         </TableCell>
-        <TableCell>{row['solicnum']}</TableCell>
+        <TableCell>{row.solicnum}</TableCell>
         <TableCell>{row.colaborador}</TableCell>
         <TableCell>{row.cpf}</TableCell>
         <TableCell>{row.tipocolaborador}</TableCell>
@@ -91,7 +95,7 @@ export default function UserOpenRequests({ rows, title }: TableProps) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell></TableCell>
+              <TableCell />
               <TableCell>Status</TableCell>
               <TableCell>Num</TableCell>
               <TableCell>Colaborador</TableCell>

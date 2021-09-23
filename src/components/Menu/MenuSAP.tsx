@@ -1,17 +1,19 @@
-import React from 'react';
-import sapicon from '../../assets/sap2.svg';
-import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemText, Collapse } from '@material-ui/core';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ArtTrackIcon from '@material-ui/icons/ArtTrack';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import ControlCameraIcon from '@material-ui/icons/ControlCamera';
-import { Link } from 'react-router-dom';
+import { List, ListItem, ListItemText, Collapse } from "@material-ui/core";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { makeStyles } from "@material-ui/core/styles";
+import ArtTrackIcon from "@material-ui/icons/ArtTrack";
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import React from "react";
+import { Link } from "react-router-dom";
+
+import sapicon from "../../assets/sap2.svg";
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuSAP() {
+export default function MenuSAP(): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -38,7 +40,7 @@ export default function MenuSAP() {
         <ListItemIcon>
           <ControlCameraIcon />
         </ListItemIcon>
-        <ListItemText primary="Controles Internos"></ListItemText>
+        <ListItemText primary="Controles Internos" />
       </ListItem>
 
       <ListItem button onClick={handleClick}>

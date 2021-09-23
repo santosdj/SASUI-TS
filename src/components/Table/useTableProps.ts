@@ -1,12 +1,9 @@
-import { useStyles } from './useTableStyles';
-import {
-  HeadCell,
-  RequestType,
-} from '../../hooks/useRequestTable';
+import { IHeadCell, RequestType } from "../../hooks/useRequestTable";
+import { useStyles } from "./useTableStyles";
 
-export type Order = 'asc' | 'desc';
+export type Order = "asc" | "desc";
 
-export interface EnhancedTableProps {
+export interface IEnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
   numSelected: number;
   onRequestSort: (
@@ -17,13 +14,12 @@ export interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
-  headCells: HeadCell[];
+  headCells: IHeadCell[];
 }
 
 export type TableProps = {
   rows: RequestType[];
-  headerData: HeadCell[];
+  headerData: IHeadCell[];
   title: string;
   tableType: string;
 };
-

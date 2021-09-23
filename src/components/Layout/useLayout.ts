@@ -4,8 +4,7 @@ import {
   Theme,
   createStyles,
   useTheme,
-} from '@material-ui/core/styles';
-import { CenterFocusStrong } from '@material-ui/icons';
+} from "@material-ui/core/styles";
 
 type AppConfigType = {
   accountmenu: {
@@ -31,25 +30,23 @@ type AppConfigType = {
   };
 };
 
-
-
-export function useLayout(){
+export function useLayout() {
   const drawerWidth = 240;
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        display: 'flex',
+        display: "flex",
       },
       title: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-          display: 'block',
+        display: "none",
+        [theme.breakpoints.up("sm")]: {
+          display: "block",
         },
-        paddingRight: '20px',
+        paddingRight: "20px",
       },
       appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
@@ -57,7 +54,7 @@ export function useLayout(){
       appBarShift: {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.enteringScreen,
         }),
@@ -66,35 +63,35 @@ export function useLayout(){
         marginRight: 36,
       },
       hide: {
-        display: 'none',
+        display: "none",
       },
       drawer: {
         width: drawerWidth,
         flexShrink: 0,
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       drawerOpen: {
         width: drawerWidth,
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.enteringScreen,
         }),
       },
       drawerClose: {
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        overflowX: 'hidden',
+        overflowX: "hidden",
         width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
           width: theme.spacing(9) + 1,
         },
       },
       toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
@@ -107,63 +104,63 @@ export function useLayout(){
         position: "relative",
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
+        "&:hover": {
           backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
+        width: "100%",
+        [theme.breakpoints.up("sm")]: {
           marginLeft: theme.spacing(3),
-          width: 'auto',
+          width: "auto",
         },
       },
       searchIcon: {
         padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: "100%",
+        position: "absolute",
+        pointerEvents: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       },
       inputRoot: {
-        color: 'inherit',
+        color: "inherit",
       },
       inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-          width: '20ch',
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("md")]: {
+          width: "20ch",
         },
-      },    
-      cardSection:{
-         minHeight: 140,
-         width:"100%",    
+      },
+      cardSection: {
+        minHeight: 140,
+        width: "100%",
       },
       cardContent: {
-        display:"flex",
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
       },
-      cardAvatar:{
-        display:"block",
+      cardAvatar: {
+        display: "block",
         width: 100,
-        height:100,      
-        margin:20 
+        height: 100,
+        margin: 20,
       },
       sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-          display: 'flex',
+        display: "none",
+        [theme.breakpoints.up("md")]: {
+          display: "flex",
         },
       },
       sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-          display: 'none',
+        display: "flex",
+        [theme.breakpoints.up("md")]: {
+          display: "none",
         },
       },
       grow: {
@@ -172,32 +169,30 @@ export function useLayout(){
     })
   );
 
-
   const config: AppConfigType = {
     accountmenu: {
-      desktopid: 'account-menu',
-      mobileid: 'account-menu-mobile',
-      profiletext: 'Perfil',
-      accounttext: 'Conta',
-      avatar: 'https://material-ui.com/static/images/avatar/1.jpg',
-      avataralt: 'Fake user',
+      desktopid: "account-menu",
+      mobileid: "account-menu-mobile",
+      profiletext: "Perfil",
+      accounttext: "Conta",
+      avatar: "https://material-ui.com/static/images/avatar/1.jpg",
+      avataralt: "Fake user",
     },
     message: {
       count: 4,
       text: `show ${2} new mails`,
-      menutext: 'Mensagens',
+      menutext: "Mensagens",
     },
     notification: {
       count: 6,
       text: `show ${4} new alerts`,
-      menutext: 'Notificações',
+      menutext: "Notificações",
     },
     search: {
-      placeholder: 'Pesquisar...',
+      placeholder: "Pesquisar...",
     },
-
   };
   const theme = useTheme();
   const classes = useStyles();
-  return{config,classes,drawerWidth,theme};
+  return { config, classes, drawerWidth, theme };
 }

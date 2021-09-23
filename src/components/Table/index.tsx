@@ -1,20 +1,21 @@
-import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import { RequestType } from '../../hooks/useRequestTable';
-import { EnhancedTableToolbar } from './TableToolBar';
-import { EnhancedTableHead } from './TableHead';
-import { useStyles } from './useTableStyles';
-import { Order, TableProps } from './useTableProps';
-import { useHistory } from 'react-router-dom';
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Paper from "@material-ui/core/Paper";
+import Switch from "@material-ui/core/Switch";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import React from "react";
+import { useHistory } from "react-router-dom";
+
+import { RequestType } from "../../hooks/useRequestTable";
+import { EnhancedTableHead } from "./TableHead";
+import { EnhancedTableToolbar } from "./TableToolBar";
+import { Order, TableProps } from "./useTableProps";
+import { useStyles } from "./useTableStyles";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -33,7 +34,7 @@ function getComparator<Key extends keyof any>(
   a: { [key in Key]: number | string },
   b: { [key in Key]: number | string }
 ) => number {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -53,15 +54,51 @@ export default function EnhancedTable({
   headerData,
   title,
   tableType,
-}: TableProps) {
+}: TableProps): JSX.Element {
   const classes = useStyles();
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof RequestType>('solicnum');
+  const [order, setOrder] = React.useState<Order>("asc");
+  const [orderBy, setOrderBy] = React.useState<keyof RequestType>("solicnum");
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const history = useHistory();
+
+  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected: string[] = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
+
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.id);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleOpenRequestClick = (
+    event: React.MouseEvent<unknown>,
+    requestId: string
+  ) => {
+    history.push(`/request/open/${requestId}`);
+  };
 
   const tableRowByNumber = (
     row: RequestType,
@@ -81,7 +118,7 @@ export default function EnhancedTable({
         <TableCell padding="checkbox">
           <Checkbox
             checked={isItemSelected}
-            inputProps={{ 'aria-labelledby': labelId }}
+            inputProps={{ "aria-labelledby": labelId }}
             onClick={(event) => {
               event.stopPropagation();
               handleClick(event, row.id);
@@ -116,7 +153,7 @@ export default function EnhancedTable({
         <TableCell padding="checkbox">
           <Checkbox
             checked={isItemSelected}
-            inputProps={{ 'aria-labelledby': labelId }}
+            inputProps={{ "aria-labelledby": labelId }}
             onClick={(event) => {
               event.stopPropagation();
               handleClick(event, row.id);
@@ -138,45 +175,9 @@ export default function EnhancedTable({
     event: React.MouseEvent<unknown>,
     property: keyof RequestType
   ) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleOpenRequestClick = (
-    event: React.MouseEvent<unknown>,
-    requestId: string
-  ) => {
-    history.push(`/request/open/${requestId}`);
-  };
-
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected: string[] = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -207,7 +208,7 @@ export default function EnhancedTable({
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -227,7 +228,7 @@ export default function EnhancedTable({
                   const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   const line =
-                    tableType === 'status'
+                    tableType === "status"
                       ? tableRowByStatus(row, isItemSelected, labelId)
                       : tableRowByNumber(row, isItemSelected, labelId);
                   return line;
@@ -240,15 +241,6 @@ export default function EnhancedTable({
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[15, 20, 30]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}

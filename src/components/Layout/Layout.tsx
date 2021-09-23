@@ -1,12 +1,13 @@
-import { ReactNode } from 'react';
-import MenuNavigator from './AppBar';
-import { useLayout } from './useLayout';
+import React, { ReactNode } from "react";
+
+import MenuNavigator from "./AppBar";
+import { useLayout } from "./useLayout";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
-export default function Layout(props: LayoutProps) {
+export default function Layout({ children }: LayoutProps): JSX.Element {
   const { classes } = useLayout();
 
   return (
@@ -14,7 +15,7 @@ export default function Layout(props: LayoutProps) {
       <MenuNavigator />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        {children}
       </main>
     </div>
   );

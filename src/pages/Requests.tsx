@@ -1,13 +1,14 @@
-import { useParams } from 'react-router-dom';
-import EnhancedTable from '../components/Table';
-import { useEffect, useState } from 'react';
-import { useRequestTable, RequestType } from '../hooks/useRequestTable';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import EnhancedTable from "../components/Table";
+import { useRequestTable, RequestType } from "../hooks/useRequestTable";
 
 type RequestsParams = {
   orderby: string;
 };
 
-export function Requests() {
+export function Requests(): JSX.Element {
   const params = useParams<RequestsParams>();
   const [requests, setRequests] = useState<RequestType[]>([]);
   const headCells = useRequestTable(params.orderby);
@@ -25,16 +26,16 @@ export function Requests() {
     <div>
       <EnhancedTable
         rows={
-          params.orderby === 'ci'
+          params.orderby === "ci"
             ? requests.filter((request) => {
-                return request.significadostatus === 'Controles Internos';
+                return request.significadostatus === "Controles Internos";
               })
             : requests
         }
         headerData={headCells.headCells}
         title={`Listagem de requests - ${params.orderby}`}
         tableType={params.orderby}
-      ></EnhancedTable>
+      />
     </div>
   );
 }

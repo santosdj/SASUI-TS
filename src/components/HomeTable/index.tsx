@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Table,
   TableBody,
@@ -7,12 +6,14 @@ import {
   TableRow,
   Paper,
   Checkbox,
-} from '@material-ui/core';
-import { RequestType } from '../../hooks/useRequestTable';
-import { EnhancedTableHead } from '../Table/TableHead';
-import { useStyles } from '../Table/useTableStyles';
-import { Order, TableProps } from '../Table/useTableProps';
-import { useHistory } from 'react-router-dom';
+} from "@material-ui/core";
+import React from "react";
+import { useHistory } from "react-router-dom";
+
+import { RequestType } from "../../hooks/useRequestTable";
+import { EnhancedTableHead } from "../Table/TableHead";
+import { Order, TableProps } from "../Table/useTableProps";
+import { useStyles } from "../Table/useTableStyles";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -31,7 +32,7 @@ function getComparator<Key extends keyof any>(
   a: { [key in Key]: number | string },
   b: { [key in Key]: number | string }
 ) => number {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -51,93 +52,22 @@ export default function HomeTable({
   headerData,
   title,
   tableType,
-}: TableProps) {
+}: TableProps): JSX.Element {
   const classes = useStyles();
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof RequestType>('solicnum');
+  const [order, setOrder] = React.useState<Order>("asc");
+  const [orderBy, setOrderBy] = React.useState<keyof RequestType>("solicnum");
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const history = useHistory();
 
-  const tableRowByNumber = (
-    row: RequestType,
-    isItemSelected: boolean,
-    labelId: string
-  ) => {
-    return (
-      <TableRow
-        hover
-        onClick={(event) => handleOpenRequestClick(event, row.id)}
-        role="checkbox"
-        aria-checked={isItemSelected}
-        tabIndex={-1}
-        key={row.id}
-        selected={isItemSelected}
-      >
-        <TableCell padding="checkbox">
-          <Checkbox
-            checked={isItemSelected}
-            inputProps={{ 'aria-labelledby': labelId }}
-            onClick={(event) => {
-              event.stopPropagation();
-              handleClick(event, row.id);
-            }}
-          />
-        </TableCell>
-        <TableCell component="th" id={labelId} scope="row" padding="none">
-          {row.solicnum}
-        </TableCell>
-        <TableCell>{row.significadostatus}</TableCell>
-        <TableCell align="right">{row.colaborador}</TableCell>
-        <TableCell>{row.tipochamado}</TableCell>
-      </TableRow>
-    );
-  };
-
-  const tableRowByStatus = (
-    row: RequestType,
-    isItemSelected: boolean,
-    labelId: string
-  ) => {
-    return (
-      <TableRow
-        hover
-        role="checkbox"
-        aria-checked={isItemSelected}
-        tabIndex={-1}
-        key={row.id}
-        selected={isItemSelected}
-        onClick={(event) => handleOpenRequestClick(event, row.id)}
-      >
-        <TableCell padding="checkbox">
-          <Checkbox
-            checked={isItemSelected}
-            inputProps={{ 'aria-labelledby': labelId }}
-            onClick={(event) => {
-              event.stopPropagation();
-              handleClick(event, row.id);
-            }}
-          />
-        </TableCell>
-        <TableCell component="th" id={labelId} scope="row" padding="none">
-          {row.significadostatus}
-        </TableCell>
-        <TableCell>{row.solicnum}</TableCell>
-        <TableCell>{row.data_sol}</TableCell>
-        <TableCell align="right">{row.colaborador}</TableCell>
-        <TableCell>{row.tipochamado}</TableCell>
-      </TableRow>
-    );
-  };
-
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof RequestType
   ) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -177,6 +107,77 @@ export default function HomeTable({
     setSelected(newSelected);
   };
 
+  const tableRowByNumber = (
+    row: RequestType,
+    isItemSelected: boolean,
+    labelId: string
+  ) => {
+    return (
+      <TableRow
+        hover
+        onClick={(event) => handleOpenRequestClick(event, row.id)}
+        role="checkbox"
+        aria-checked={isItemSelected}
+        tabIndex={-1}
+        key={row.id}
+        selected={isItemSelected}
+      >
+        <TableCell padding="checkbox">
+          <Checkbox
+            checked={isItemSelected}
+            inputProps={{ "aria-labelledby": labelId }}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleClick(event, row.id);
+            }}
+          />
+        </TableCell>
+        <TableCell component="th" id={labelId} scope="row" padding="none">
+          {row.solicnum}
+        </TableCell>
+        <TableCell>{row.significadostatus}</TableCell>
+        <TableCell align="right">{row.colaborador}</TableCell>
+        <TableCell>{row.tipochamado}</TableCell>
+      </TableRow>
+    );
+  };
+
+  const tableRowByStatus = (
+    row: RequestType,
+    isItemSelected: boolean,
+    labelId: string
+  ) => {
+    return (
+      <TableRow
+        hover
+        role="checkbox"
+        aria-checked={isItemSelected}
+        tabIndex={-1}
+        key={row.id}
+        selected={isItemSelected}
+        onClick={(event) => handleOpenRequestClick(event, row.id)}
+      >
+        <TableCell padding="checkbox">
+          <Checkbox
+            checked={isItemSelected}
+            inputProps={{ "aria-labelledby": labelId }}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleClick(event, row.id);
+            }}
+          />
+        </TableCell>
+        <TableCell component="th" id={labelId} scope="row" padding="none">
+          {row.significadostatus}
+        </TableCell>
+        <TableCell>{row.solicnum}</TableCell>
+        <TableCell>{row.data_sol}</TableCell>
+        <TableCell align="right">{row.colaborador}</TableCell>
+        <TableCell>{row.tipochamado}</TableCell>
+      </TableRow>
+    );
+  };
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -204,7 +205,7 @@ export default function HomeTable({
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -224,7 +225,7 @@ export default function HomeTable({
                   const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   const line =
-                    tableType === 'status'
+                    tableType === "status"
                       ? tableRowByStatus(row, isItemSelected, labelId)
                       : tableRowByNumber(row, isItemSelected, labelId);
                   return line;

@@ -1,15 +1,16 @@
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import HomeIcon from '@material-ui/icons/Home';
-import { Link } from 'react-router-dom';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import HomeIcon from "@material-ui/icons/Home";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuMain() {
+export default function MenuMain(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -29,16 +30,16 @@ export default function MenuMain() {
     >
       <ListItem button key="Home" component={Link} to="/">
         <ListItemIcon>
-          <HomeIcon></HomeIcon>
+          <HomeIcon />
         </ListItemIcon>
-        <ListItemText primary="Home"></ListItemText>
+        <ListItemText primary="Home" />
       </ListItem>
 
       <ListItem button key="Nova" component={Link} to="/request/new">
         <ListItemIcon>
           <AddCircleIcon color="primary" />
         </ListItemIcon>
-        <ListItemText primary="Nova"></ListItemText>
+        <ListItemText primary="Nova" />
       </ListItem>
     </List>
   );

@@ -1,4 +1,4 @@
-export interface HeadCell {
+export interface IHeadCell {
   disablePadding: boolean;
   id: keyof RequestType;
   label: string;
@@ -14,7 +14,7 @@ export type RequestType = {
   departamento: string;
   empresa: string;
   filial: string;
-  gerente_0: string;  
+  gerente_0: string;
   nome: string;
   nomeempresa: string;
   nomefilial: string;
@@ -26,47 +26,61 @@ export type RequestType = {
   tipocolaborador: string;
 };
 
-function setStatusTableHeader(){
- const header:HeadCell[] = [
-  {
-    id: 'significadostatus',
-    numeric: false,
-    disablePadding: true,
-    label: 'Status',
-  },
-  { id: 'solicnum', numeric: false, disablePadding: false, label: 'Num' },
-  { id: 'data_sol', numeric: false, disablePadding: false, label: 'Enviado em:' },
-  { id: 'colaborador', numeric: false,disablePadding: false, label: 'Colaborador' },
-  {id:"tipochamado", numeric:false, disablePadding: false, label: 'Tipo' },
-];
-return header;
-
+function setStatusTableHeader() {
+  const header: IHeadCell[] = [
+    {
+      id: "significadostatus",
+      numeric: false,
+      disablePadding: true,
+      label: "Status",
+    },
+    { id: "solicnum", numeric: false, disablePadding: false, label: "Num" },
+    {
+      id: "data_sol",
+      numeric: false,
+      disablePadding: false,
+      label: "Enviado em:",
+    },
+    {
+      id: "colaborador",
+      numeric: false,
+      disablePadding: false,
+      label: "Colaborador",
+    },
+    { id: "tipochamado", numeric: false, disablePadding: false, label: "Tipo" },
+  ];
+  return header;
 }
 
-function setNumberTableHeader(){
-  const header:HeadCell[] = [
-   {
-     id: 'solicnum',
-     numeric: false,
-     disablePadding: true,
-     label: 'Num',
-   },
-   { id: 'significadostatus', numeric: false, disablePadding: false, label: 'Status' },
-   { id: 'colaborador', numeric: false,disablePadding: false, label: 'Colaborador' },
-   {id:"tipochamado", numeric:false, disablePadding: false, label: 'Tipo' },
- ];
- return header;
- 
- }
-
-
-
-
-export function useRequestTable(headerType:string | "status"){
-  let headCells:HeadCell[] = [];
-  headCells = (headerType==="status" ? setStatusTableHeader(): setNumberTableHeader());
-
-  return {headCells}
+function setNumberTableHeader() {
+  const header: IHeadCell[] = [
+    {
+      id: "solicnum",
+      numeric: false,
+      disablePadding: true,
+      label: "Num",
+    },
+    {
+      id: "significadostatus",
+      numeric: false,
+      disablePadding: false,
+      label: "Status",
+    },
+    {
+      id: "colaborador",
+      numeric: false,
+      disablePadding: false,
+      label: "Colaborador",
+    },
+    { id: "tipochamado", numeric: false, disablePadding: false, label: "Tipo" },
+  ];
+  return header;
 }
 
+export function useRequestTable(headerType: string | "status") {
+  let headCells: IHeadCell[] = [];
+  headCells =
+    headerType === "status" ? setStatusTableHeader() : setNumberTableHeader();
 
+  return { headCells };
+}
