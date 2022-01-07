@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import EnhancedTable from "../components/Table";
 import { useRequestTable, RequestType } from "../hooks/useRequestTable";
+import { fetchRequestList } from "../services/data/RequestServices";
 
 type RequestsParams = {
   orderby: string;
@@ -14,7 +15,7 @@ export function Requests(): JSX.Element {
   const headCells = useRequestTable(params.orderby);
 
   async function fetchData() {
-    const data = await (await fetch(`${process.env.REACT_APP_API_URL}`)).json();
+    const data = await fetchRequestList();
     setRequests(data);
   }
 
@@ -25,13 +26,7 @@ export function Requests(): JSX.Element {
   return (
     <div>
       <EnhancedTable
-        rows={
-          params.orderby === "ci"
-            ? requests.filter((request) => {
-                return request.significadostatus === "Controles Internos";
-              })
-            : requests
-        }
+        rows={requests}
         headerData={headCells.headCells}
         title={`Listagem de requests - ${params.orderby}`}
         tableType={params.orderby}

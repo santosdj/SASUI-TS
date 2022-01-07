@@ -1,13 +1,13 @@
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import Switch from "@material-ui/core/Switch";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Paper from "@mui/material/Paper";
+import Switch from "@mui/material/Switch";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
@@ -57,7 +57,8 @@ export default function EnhancedTable({
 }: TableProps): JSX.Element {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof RequestType>("solicnum");
+  const [orderBy, setOrderBy] =
+    React.useState<keyof RequestType>("request_number");
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -86,7 +87,7 @@ export default function EnhancedTable({
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id);
+      const newSelecteds = rows.map((n) => n.request_id);
       setSelected(newSelecteds);
       return;
     }
@@ -97,7 +98,7 @@ export default function EnhancedTable({
     event: React.MouseEvent<unknown>,
     requestId: string
   ) => {
-    history.push(`/request/open/${requestId}`);
+    history.push(`/request/${requestId}`);
   };
 
   const tableRowByNumber = (
@@ -108,11 +109,11 @@ export default function EnhancedTable({
     return (
       <TableRow
         hover
-        onClick={(event) => handleOpenRequestClick(event, row.id)}
+        onClick={(event) => handleOpenRequestClick(event, row.request_id)}
         role="checkbox"
         aria-checked={isItemSelected}
         tabIndex={-1}
-        key={row.id}
+        key={row.request_id}
         selected={isItemSelected}
       >
         <TableCell padding="checkbox">
@@ -121,16 +122,16 @@ export default function EnhancedTable({
             inputProps={{ "aria-labelledby": labelId }}
             onClick={(event) => {
               event.stopPropagation();
-              handleClick(event, row.id);
+              handleClick(event, row.request_id);
             }}
           />
         </TableCell>
         <TableCell component="th" id={labelId} scope="row" padding="none">
-          {row.solicnum}
+          {row.request_number}
         </TableCell>
-        <TableCell>{row.significadostatus}</TableCell>
-        <TableCell align="right">{row.colaborador}</TableCell>
-        <TableCell>{row.tipochamado}</TableCell>
+        <TableCell>{row.request_status}</TableCell>
+        <TableCell align="right">{row.employee_fullname}</TableCell>
+        <TableCell>{row.request_type}</TableCell>
       </TableRow>
     );
   };
@@ -146,9 +147,9 @@ export default function EnhancedTable({
         role="checkbox"
         aria-checked={isItemSelected}
         tabIndex={-1}
-        key={row.id}
+        key={row.request_id}
         selected={isItemSelected}
-        onClick={(event) => handleOpenRequestClick(event, row.id)}
+        onClick={(event) => handleOpenRequestClick(event, row.request_id)}
       >
         <TableCell padding="checkbox">
           <Checkbox
@@ -156,17 +157,16 @@ export default function EnhancedTable({
             inputProps={{ "aria-labelledby": labelId }}
             onClick={(event) => {
               event.stopPropagation();
-              handleClick(event, row.id);
+              handleClick(event, row.request_id);
             }}
           />
         </TableCell>
         <TableCell component="th" id={labelId} scope="row" padding="none">
-          {row.significadostatus}
+          {row.request_status}
         </TableCell>
-        <TableCell>{row.solicnum}</TableCell>
-        <TableCell>{row.data_sol}</TableCell>
-        <TableCell align="right">{row.colaborador}</TableCell>
-        <TableCell>{row.tipochamado}</TableCell>
+        <TableCell>{row.request_number}</TableCell>
+        <TableCell align="right">{row.employee_fullname}</TableCell>
+        <TableCell>{row.request_type}</TableCell>
       </TableRow>
     );
   };
@@ -225,7 +225,7 @@ export default function EnhancedTable({
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(row.request_id);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   const line =
                     tableType === "status"
@@ -241,6 +241,15 @@ export default function EnhancedTable({
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}

@@ -1,10 +1,6 @@
-import {
-  fade,
-  makeStyles,
-  Theme,
-  createStyles,
-  useTheme,
-} from "@material-ui/core/styles";
+import { alpha, Theme, useTheme } from "@mui/material/styles";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 
 type AppConfigType = {
   accountmenu: {
@@ -31,7 +27,7 @@ type AppConfigType = {
 };
 
 export function useLayout() {
-  const drawerWidth = 240;
+  const drawerWidth = 230;
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -98,14 +94,14 @@ export function useLayout() {
       },
       content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(0.3),
       },
       search: {
         position: "relative",
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
         "&:hover": {
-          backgroundColor: fade(theme.palette.common.white, 0.25),
+          backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -130,7 +126,7 @@ export function useLayout() {
       inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create("width"),
         width: "100%",
         [theme.breakpoints.up("md")]: {

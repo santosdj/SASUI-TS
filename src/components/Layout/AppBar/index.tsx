@@ -1,6 +1,12 @@
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SearchIcon from "@mui/icons-material/Search";
 import {
-  Drawer,
-  AppBar,
   Toolbar,
   Typography,
   Divider,
@@ -14,16 +20,11 @@ import {
   CardContent,
   CardActions,
   Button,
-} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import SearchIcon from "@material-ui/icons/Search";
+} from "@mui/material";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiDrawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import clsx from "clsx";
 import React, { Fragment } from "react";
 
@@ -33,16 +34,80 @@ import MenuSAP from "../../Menu/MenuSAP";
 import MenuSolicitacoes from "../../Menu/MenuSolicitacoes";
 import { useLayout } from "../useLayout";
 
+const drawerWidth = 230;
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(9)} + 1px)`,
+  },
+});
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
 export default function MenuNavigator(): JSX.Element {
   const { accountInfo, signOut } = useAuth();
   const [open, setOpen] = React.useState(false);
   const { config, classes, theme } = useLayout();
 
   const handleDrawerOpen = () => {
+    console.log("handle open");
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
+    console.log("handle close");
     setOpen(false);
   };
 
@@ -121,7 +186,11 @@ export default function MenuNavigator(): JSX.Element {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label={config.message.text} color="inherit">
+        <IconButton
+          aria-label={config.message.text}
+          color="inherit"
+          size="large"
+        >
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -129,7 +198,11 @@ export default function MenuNavigator(): JSX.Element {
         <p>{config.message.menutext}</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label={config.notification.text} color="inherit">
+        <IconButton
+          aria-label={config.notification.text}
+          color="inherit"
+          size="large"
+        >
           <Badge badgeContent={config.notification.count} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -142,6 +215,7 @@ export default function MenuNavigator(): JSX.Element {
           aria-controls={config.accountmenu.desktopid}
           aria-haspopup="true"
           color="inherit"
+          size="large"
         />
         <AccountCircle />
         <p>{config.accountmenu.profiletext}</p>
@@ -151,12 +225,7 @@ export default function MenuNavigator(): JSX.Element {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -166,6 +235,7 @@ export default function MenuNavigator(): JSX.Element {
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
+            size="large"
           >
             <MenuIcon />
           </IconButton>
@@ -188,12 +258,20 @@ export default function MenuNavigator(): JSX.Element {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label={config.message.text} color="inherit">
+            <IconButton
+              aria-label={config.message.text}
+              color="inherit"
+              size="large"
+            >
               <Badge badgeContent={config.message.count} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label={config.notification.text} color="inherit">
+            <IconButton
+              aria-label={config.notification.text}
+              color="inherit"
+              size="large"
+            >
               <Badge badgeContent={config.notification.count} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -205,6 +283,7 @@ export default function MenuNavigator(): JSX.Element {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              size="large"
             >
               <Avatar
                 alt={accountInfo?.user.displayName}
@@ -219,6 +298,7 @@ export default function MenuNavigator(): JSX.Element {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
+              size="large"
             >
               <MoreIcon />
             </IconButton>
@@ -228,21 +308,9 @@ export default function MenuNavigator(): JSX.Element {
       {renderMobileMenu}
       {renderMenu}
 
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
+      <Drawer variant="permanent" open={open}>
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} size="large">
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (

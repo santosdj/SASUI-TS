@@ -1,0 +1,253 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Stepper from "@mui/material/Stepper";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import { boolean, number } from "yup";
+import { string } from "yup/lib/locale";
+
+import { fetchRequestWorkFlow } from "../../services/data/RequestServices";
+
+interface IProps {
+  request_id: string;
+  initialStep: number;
+}
+
+interface IStep {
+  label: string;
+  labelObservation: string;
+  completed: boolean;
+  text: string;
+  isInitial: boolean;
+}
+
+interface INewStep {
+  id: number;
+  status: string;
+  isCurrent: boolean;
+  isRequired: boolean;
+  isConcluded: boolean;
+  statusDate: Date;
+  concludedOn: Date;
+  responsables: {
+    isDone: boolean;
+    doneBy: string;
+    group: string;
+    users: string[];
+    doneCount: number;
+    doingCount: number;
+  };
+}
+
+/* const steps: IStep[] = [
+  {
+    label: "Gestor",
+    labelObservation: "sla ok",
+    completed: true,
+    text: "Gestor bla",
+  },
+  {
+    label: "TI - Liberação de Licença",
+    labelObservation: "",
+    completed: true,
+    text: "Licença",
+  },
+  {
+    label: "Controles Internos LDC Brazil",
+    labelObservation: "",
+    completed: false,
+    text: "Controles",
+  },
+  {
+    label: "Área Responsável pelo Perfil",
+    labelObservation: "",
+    completed: false,
+    text: "perfil",
+  },
+  {
+    label: "TI - Processamento da Solicitação",
+    labelObservation: "",
+    completed: false,
+    text: "execução",
+  },
+  {
+    label: "Encerrado",
+    labelObservation: "",
+    completed: false,
+    text: "Encerrado",
+  },
+];
+*/
+export default function WorkFlowSteps({
+  request_id,
+  initialStep,
+}: IProps): JSX.Element {
+  const [isCancelled, setIsCancelled] = React.useState<boolean>(false);
+  const [initialData, setInitialData] = React.useState<IStep[]>([]);
+  const steps: IStep[] = [];
+
+  const [activeStep, setActiveStep] = React.useState(initialStep);
+  const [skipped, setSkipped] = React.useState(new Set<number>());
+
+  function getLabelObservation(element: any): string {
+    if (element.isConcluded) return `Completed on ${element.concludedOn}`;
+
+    if (element.concludedOn) return `Updated on ${element.concludedOn}`;
+    return "";
+  }
+
+  async function fetchData() {
+    const data = await fetchRequestWorkFlow(request_id);
+    console.log("no form", data);
+
+    if (!isCancelled) {
+      data.forEach((element: any) => {
+        if (element.isRequired) {
+          steps.push({
+            label: element.status,
+            labelObservation: getLabelObservation(element),
+            completed: element.isConcluded,
+            text: "bla",
+            isInitial: element.isCurrent,
+          });
+        }
+      });
+      setInitialData(steps);
+      console.log(steps);
+
+      const pos = steps.findIndex((value: any) => value.isInitial);
+      if (pos === -1) setActiveStep(0);
+      else setActiveStep(pos);
+      console.log("posição corrente", pos);
+      console.log("definiu initial data", data);
+    }
+  }
+
+  React.useEffect(() => {
+    setIsCancelled(false);
+    fetchData();
+    console.log("terminou de carregar");
+
+    return () => {
+      console.log("entrou no cancelado");
+      setIsCancelled(true);
+    };
+  }, []);
+
+  const isStepOptional = (step: number) => {
+    return true;
+  };
+
+  const isStepSkipped = (step: number) => {
+    return skipped.has(step);
+  };
+
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleSkip = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      {initialData && (
+        <Stepper
+          activeStep={activeStep || 0}
+          sx={{
+            marginTop: "24px",
+            marginBottom: "24px",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          {initialData.map((value, index) => {
+            const stepProps: { completed?: boolean } = {};
+            const labelProps: {
+              optional?: React.ReactNode;
+            } = {};
+            if (value.labelObservation) {
+              labelProps.optional = (
+                <Typography variant="caption">
+                  {value.labelObservation}
+                </Typography>
+              );
+            }
+            if (isStepSkipped(index)) {
+              stepProps.completed = value.completed;
+            }
+            stepProps.completed = value.completed;
+
+            return (
+              <Step key={value.label} {...stepProps} color="success">
+                <StepLabel {...labelProps}>{value.label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+      )}
+      {activeStep === initialData.length ? (
+        <>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            All steps completed - you&apos;re finished
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Button onClick={handleReset}>Reset</Button>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            Step aa {activeStep + 1}
+            {initialData[activeStep].text}
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: "1 1 auto" }} />
+            {isStepOptional(activeStep) && (
+              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                Skip
+              </Button>
+            )}
+            <Button onClick={handleNext}>
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            </Button>
+          </Box>
+          );
+        </>
+      )}
+    </Box>
+  );
+}

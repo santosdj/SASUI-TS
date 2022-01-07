@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
-import { Paper, Typography, Button } from "@material-ui/core";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Paper, Typography, Button } from "@mui/material";
+import { Theme } from "@mui/material/styles";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 

@@ -12,8 +12,6 @@ interface IPrivateRouteProps extends RouteProps {
 const PrivateRoute = (props: IPrivateRouteProps) => {
   const { component: Component, location, ...rest } = props;
   const { accountInfo } = useAuth();
-  console.log("Private Route");
-  console.log(accountInfo?.isAuthenticated);
 
   return (
     <Route

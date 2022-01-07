@@ -5,49 +5,66 @@ export interface IHeadCell {
   numeric: boolean;
 }
 export type RequestType = {
-  id: string;
-  cargo: string;
-  centrolucro: string;
-  colaborador: string;
-  cpf: string;
-  data_sol: string;
-  departamento: string;
-  empresa: string;
-  filial: string;
-  gerente_0: string;
-  nome: string;
-  nomeempresa: string;
-  nomefilial: string;
-  observacoes: string;
-  plataforma: string;
-  significadostatus: string;
-  solicnum: string;
-  tipochamado: string;
-  tipocolaborador: string;
+  request_id: string;
+  requested_by_id: string;
+  requested_by_name: string;
+  requested_by_email: string;
+  request_number: string;
+  request_status: string;
+  request_type: string;
+  request_copy_list: string;
+  request_observation: string;
+  employee_fullname: string;
+  employee_email: string;
+  employee_type: string;
+  employee_type_description: string;
+  employee_profile_edition_rule: string;
+  employee_role_id: string;
+  employee_role_description: string;
+  employee_plataform_id: string;
+  employee_plataform_description: string;
+  employee_costcenter_id: string;
+  employee_costcenter_description: string;
+  employee_company_id: string;
+  employee_company_description: string;
+  employee_branch_id: string;
+  employee_branch_description: string;
+  employe_manager_id: string;
+  employee_manager_name: string;
+  employee_login: string;
+  employee_sap_id: string;
+  employee_userid_sap_status: string;
+  employee_userid_sap_expiration_date: string;
+  employee_as400_id: string;
+  employee_userid_as400_description: string;
 };
 
 function setStatusTableHeader() {
   const header: IHeadCell[] = [
     {
-      id: "significadostatus",
+      id: "request_status",
       numeric: false,
       disablePadding: true,
       label: "Status",
     },
-    { id: "solicnum", numeric: false, disablePadding: false, label: "Num" },
     {
-      id: "data_sol",
+      id: "request_number",
       numeric: false,
       disablePadding: false,
-      label: "Enviado em:",
+      label: "Num",
     },
     {
-      id: "colaborador",
+      id: "employee_fullname",
       numeric: false,
       disablePadding: false,
       label: "Colaborador",
     },
-    { id: "tipochamado", numeric: false, disablePadding: false, label: "Tipo" },
+    {
+      id: "request_type",
+      numeric: false,
+      disablePadding: false,
+      label: "Tipo",
+    },
   ];
   return header;
 }
@@ -55,24 +72,29 @@ function setStatusTableHeader() {
 function setNumberTableHeader() {
   const header: IHeadCell[] = [
     {
-      id: "solicnum",
+      id: "request_number",
       numeric: false,
       disablePadding: true,
       label: "Num",
     },
     {
-      id: "significadostatus",
+      id: "request_status",
       numeric: false,
       disablePadding: false,
       label: "Status",
     },
     {
-      id: "colaborador",
+      id: "employee_fullname",
       numeric: false,
       disablePadding: false,
       label: "Colaborador",
     },
-    { id: "tipochamado", numeric: false, disablePadding: false, label: "Tipo" },
+    {
+      id: "request_type",
+      numeric: false,
+      disablePadding: false,
+      label: "Tipo",
+    },
   ];
   return header;
 }

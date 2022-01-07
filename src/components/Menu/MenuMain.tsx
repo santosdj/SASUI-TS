@@ -1,10 +1,10 @@
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles } from "@material-ui/core/styles";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import HomeIcon from "@material-ui/icons/Home";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import HomeIcon from "@mui/icons-material/Home";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -12,10 +12,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: 16,
   },
 }));
 
@@ -35,11 +34,18 @@ export default function MenuMain(): JSX.Element {
         <ListItemText primary="Home" />
       </ListItem>
 
-      <ListItem button key="Nova" component={Link} to="/request/new">
+      <ListItem button key="Nova" component={Link} to="/sap/request">
         <ListItemIcon>
           <AddCircleIcon color="primary" />
         </ListItemIcon>
-        <ListItemText primary="Nova" />
+        <ListItemText primary="SAP" />
+      </ListItem>
+
+      <ListItem button key="Nova 2" component={Link} to="/as400/request">
+        <ListItemIcon>
+          <AddCircleIcon color="primary" />
+        </ListItemIcon>
+        <ListItemText primary="AS400" />
       </ListItem>
     </List>
   );

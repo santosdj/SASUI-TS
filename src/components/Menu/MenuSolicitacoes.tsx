@@ -1,11 +1,11 @@
-import { List, ListItem, ListItemText, Collapse } from "@material-ui/core";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { makeStyles } from "@material-ui/core/styles";
-import ArtTrackIcon from "@material-ui/icons/ArtTrack";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import FolderOpenIcon from "@material-ui/icons/FolderOpen";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import ArtTrackIcon from "@mui/icons-material/ArtTrack";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import { List, ListItem, ListItemText, Collapse } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -13,10 +13,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: 16,
   },
 }));
 
