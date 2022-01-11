@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/static/js/main.b9bded04.chunk.js",
+    "main.js.map": "/static/js/main.b9bded04.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8f4898cb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8f4898cb.js.map",
+    "static/js/2.7e4b07b6.chunk.js": "/static/js/2.7e4b07b6.chunk.js",
+    "static/js/2.7e4b07b6.chunk.js.map": "/static/js/2.7e4b07b6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.7e4b07b6.chunk.js.LICENSE.txt": "/static/js/2.7e4b07b6.chunk.js.LICENSE.txt",
+    "static/media/LDC_logo.e1f3b1fa.png": "/static/media/LDC_logo.e1f3b1fa.png",
+    "static/media/sap2.bc41474a.svg": "/static/media/sap2.bc41474a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8f4898cb.js",
+    "static/js/2.7e4b07b6.chunk.js",
+    "static/js/main.b9bded04.chunk.js"
+  ]
+}
