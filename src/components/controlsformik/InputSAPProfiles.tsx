@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Button } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useField, useFormikContext } from "formik";
@@ -31,7 +30,6 @@ export default function InputSAPProfiles({
   label,
   placeHolder,
   parentValue,
-  editMode,
   addToTable,
   handleProfileChange,
   disabledOptions,
@@ -40,7 +38,7 @@ export default function InputSAPProfiles({
   // const [value, setValue] = React.useState<ISelectData[]>([]);
 
   const [field, mata] = useField(name);
-  const { setFieldValue, validateForm, values } = useFormikContext();
+  const { setFieldValue } = useFormikContext();
   const [inputValue, setInputValue] = React.useState("");
 
   const configTextField: IError = {};
@@ -103,13 +101,13 @@ export default function InputSAPProfiles({
       options={options}
       getOptionLabel={(option) => `${option.id} - ${option.description}`}
       filterSelectedOptions
-      onChange={(event: any, value: ISelectData[], reason, details) => {
+      onChange={(event: React.SyntheticEvent, value: ISelectData[]) => {
         setFieldValue(name, value);
         if (addToTable) {
           handleProfileChange(value);
         }
       }}
-      onInputChange={(event: any, newInputValue, reason) => {
+      onInputChange={(event: React.SyntheticEvent, newInputValue) => {
         setInputValue(newInputValue);
       }}
       getOptionDisabled={(option) => {

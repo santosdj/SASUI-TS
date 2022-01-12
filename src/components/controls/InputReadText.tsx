@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import { InputProps } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import React from "react";
 

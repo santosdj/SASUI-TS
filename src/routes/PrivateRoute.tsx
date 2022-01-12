@@ -6,10 +6,11 @@ import { useAuth } from "../hooks/useAuth";
 
 interface IPrivateRouteProps extends RouteProps {
   // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: any;
 }
 
-const PrivateRoute = (props: IPrivateRouteProps) => {
+const PrivateRoute = (props: IPrivateRouteProps): JSX.Element => {
   const { component: Component, location, ...rest } = props;
   const { accountInfo } = useAuth();
 
@@ -23,7 +24,7 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
           <Redirect
             to={{
               pathname: "/signin",
-              state: { from: props.location },
+              state: { from: location },
             }}
           />
         )

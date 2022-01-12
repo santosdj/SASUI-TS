@@ -34,12 +34,13 @@ export default function InputText({
     configTextField.error = true;
     configTextField.helperText = mata.error;
   }
-  if (typeof field.value === "object") {
-    configTextField.value = labelWithId
-      ? `${field.value.id}-${field.value.description}`
-      : field.value.description;
+  if (field.value) {
+    if (typeof field.value === "object") {
+      configTextField.value = labelWithId
+        ? `${field.value.id}-${field.value.description}`
+        : field.value.description;
+    }
   }
-
   return (
     <TextField
       id={name}

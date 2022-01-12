@@ -16,34 +16,6 @@ import {
   INITIAL_SAP_FORM_STATE,
 } from "../components/ValidationSchemas";
 
-interface ICreateSAPRequest {
-  user: {
-    service_id: string;
-    service_description: string;
-    environment: string;
-    is_new_user: boolean;
-    user_id: string;
-    reused_user_id_license: string;
-    observation: string;
-  };
-  profiles: {
-    service_id: string;
-    service_description: string;
-    environment: string;
-    is_new_user: boolean;
-    user_id: string;
-    is_job_postion: boolean;
-    job_position: string;
-    profile_name: string;
-    profile_description: string;
-    is_profile_temporary: boolean;
-    profile_valide_at: Date;
-    profile_expires_at: Date;
-    has_conflict: boolean;
-    restricted_access: boolean;
-  }[];
-}
-
 const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time));
 
 export function NewSAPRequestForm(): JSX.Element {

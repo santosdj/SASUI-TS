@@ -8,7 +8,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     maxWidth: 360,

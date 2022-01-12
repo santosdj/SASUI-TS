@@ -3,6 +3,7 @@ import { IData } from "../../pages/RequestStepForm/components/Interface";
 const API_BASE_URL = process.env.REACT_APP_API_SAS_URL;
 
 export const getSAPEnvironmentCollection = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id?: string
 ): Promise<IData[]> => {
   const data = [
@@ -151,6 +152,7 @@ export const getSAPServiceTypeCollection = async (
 };
 
 export const getSAPProfileTypeCollection = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id?: string
 ): Promise<IData[]> => {
   const data = [
@@ -173,6 +175,7 @@ export const getSAPUserIdCollection = async (id?: string): Promise<IData[]> => {
   const response = await fetch(url);
   const data = await response.json();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapeddata = data.map((value: any) => {
     return { id: value.user_user_id, description: value.user_user_name };
   });
@@ -189,6 +192,7 @@ export const getJobPositionCollection = async (
   const response = await fetch(url);
   const data = await response.json();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapeddata = data.map((value: any) => {
     return { id: value.id, description: value.job_position };
   });
@@ -197,6 +201,7 @@ export const getJobPositionCollection = async (
 };
 
 export const getSAPTemporyFieldCollection = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id?: string
 ): Promise<IData[]> => {
   const data = [
@@ -223,6 +228,7 @@ export const getSAProfileCollection = async (
   const response = await fetch(url);
   const data = await response.json();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapeddata = data.map((value: any) => {
     return { id: value.profile_name, description: value.profile_description };
   });

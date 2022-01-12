@@ -60,27 +60,6 @@ interface ISAPUserRequest {
   observation: string;
 }
 
-interface ISAPProfile {
-  service_id: string;
-  service_description: string;
-  environment: string;
-  is_new_user: boolean;
-  user_id: string;
-  is_job_postion: boolean;
-  job_position: string;
-  profile_name: string;
-  profile_description: string;
-  is_profile_temporary: boolean;
-  profile_valide_at: Date;
-  profile_expires_at: Date;
-  has_conflict: boolean;
-  restricted_access: boolean;
-}
-
-interface ICreateSAPRequest {
-  user: ISAPUserRequest;
-  profiles: ISAPProfile[];
-}
 export default function SAPSubmitForm(): JSX.Element {
   const setRequestType = () => {
     return "SAP";

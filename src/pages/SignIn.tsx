@@ -9,7 +9,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import logo from "../assets/LDC_logo.png";
 import { useAuth } from "../hooks/useAuth";
 
-export default function SignIn() {
+export default function SignIn(): JSX.Element {
   const { signInWithAD, accountInfo } = useAuth();
   const history = useHistory();
 

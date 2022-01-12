@@ -1,22 +1,16 @@
-import { IconPropsColorOverrides } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import FormLabel from "@mui/material/FormLabel";
 import { useField, useFormikContext } from "formik";
 import * as React from "react";
 
-interface IError {
-  error?: boolean;
-  helperText?: string;
-}
 interface IProps {
   name: string;
 }
 
 export default function CheckBoxAS400Access({ name }: IProps): JSX.Element {
-  const [field, mata] = useField(name);
+  const [field] = useField(name);
   const { setFieldValue } = useFormikContext();
 
   const { inc, exc, alt, con } = field.value;

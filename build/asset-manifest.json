@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.e29ae8b9.chunk.js",
-    "main.js.map": "/static/js/main.e29ae8b9.chunk.js.map",
+    "main.js": "/static/js/main.0754547b.chunk.js",
+    "main.js.map": "/static/js/main.0754547b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.8f4898cb.js",
     "runtime-main.js.map": "/static/js/runtime-main.8f4898cb.js.map",
-    "static/js/2.a44c1da7.chunk.js": "/static/js/2.a44c1da7.chunk.js",
-    "static/js/2.a44c1da7.chunk.js.map": "/static/js/2.a44c1da7.chunk.js.map",
+    "static/js/2.f7dcb5c1.chunk.js": "/static/js/2.f7dcb5c1.chunk.js",
+    "static/js/2.f7dcb5c1.chunk.js.map": "/static/js/2.f7dcb5c1.chunk.js.map",
     "index.html": "/index.html",
-    "static/js/2.a44c1da7.chunk.js.LICENSE.txt": "/static/js/2.a44c1da7.chunk.js.LICENSE.txt",
+    "static/js/2.f7dcb5c1.chunk.js.LICENSE.txt": "/static/js/2.f7dcb5c1.chunk.js.LICENSE.txt",
     "static/media/LDC_logo.e1f3b1fa.png": "/static/media/LDC_logo.e1f3b1fa.png",
     "static/media/sap2.bc41474a.svg": "/static/media/sap2.bc41474a.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8f4898cb.js",
-    "static/js/2.a44c1da7.chunk.js",
-    "static/js/main.e29ae8b9.chunk.js"
+    "static/js/2.f7dcb5c1.chunk.js",
+    "static/js/main.0754547b.chunk.js"
   ]
 }

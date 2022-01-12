@@ -1,11 +1,9 @@
 import Box from "@mui/material/Box";
-import { Form, Formik, FormikConfig, FormikValues } from "formik";
 import * as React from "react";
 import { useParams } from "react-router-dom";
 
 import WorkFlowSteps from "../../components/controls/WorkFlowSteps";
 import { fetchRequestsById } from "../../services/data/RequestServices";
-import { IEmployee } from "../RequestStepForm/components/Interface";
 import AS400Table from "./components/AS400Table";
 import EmployeeForm from "./components/EmployeeForm";
 import SAPTable from "./components/SAPTable";
@@ -17,6 +15,7 @@ type RequestParams = {
 export function Request(): JSX.Element {
   const params = useParams<RequestParams>();
   const [isCancelled, setIsCancelled] = React.useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [initialData, setInitialData] = React.useState<any>();
   async function fetchData() {
     const data = await fetchRequestsById(params.id);

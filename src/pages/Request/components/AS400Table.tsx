@@ -1,14 +1,8 @@
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Button } from "@mui/material";
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridRenderCellParams,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 
 interface IProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rows: any;
 }
 

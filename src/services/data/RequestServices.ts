@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   IData,
   ICompany,
@@ -198,6 +200,7 @@ export async function fetchRequestsByUser(
   return rows;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function formatEmployeeData(data: any): any {
   return {
     id: data.request_id,

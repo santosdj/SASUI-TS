@@ -37,7 +37,9 @@ interface IEnhancedTableToolbarProps {
   title: string;
 }
 
-export const EnhancedTableToolbar = (props: IEnhancedTableToolbarProps) => {
+export const EnhancedTableToolbar = (
+  props: IEnhancedTableToolbarProps
+): JSX.Element => {
   const classes = useToolbarStyles();
   const { numSelected, title } = props;
 

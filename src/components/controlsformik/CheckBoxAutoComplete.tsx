@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -27,8 +28,7 @@ interface IProps {
 }
 
 export default function CheckAutoComplete(props: IProps): JSX.Element {
-  const { label, name, labelWithId, helperText, getOptions, parentValue } =
-    props;
+  const { name, labelWithId, getOptions, parentValue } = props;
 
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState<readonly IAS400RoutineData[]>(
@@ -91,10 +91,10 @@ export default function CheckAutoComplete(props: IProps): JSX.Element {
         setOpen(false);
       }}
       inputValue={inputValue}
-      onInputChange={(event: any, newInputValue, reason) => {
+      onInputChange={(event: any, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      onChange={(event: any, values: IAS400RoutineData[], reason) => {
+      onChange={(event: any, values: IAS400RoutineData[]) => {
         setFieldValue(name, [...values]);
       }}
       options={options}

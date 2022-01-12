@@ -4,9 +4,8 @@ import {
   StyledEngineProvider,
   createTheme,
 } from "@mui/material/styles";
-import makeStyles from "@mui/styles/makeStyles";
 import React, { Fragment } from "react";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Layout from "./components/Layout/Layout";
 import { AuthProvider } from "./contexts/auth";

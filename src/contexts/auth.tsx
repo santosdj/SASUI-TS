@@ -19,6 +19,7 @@ type accountType = {
     email: string;
     avatar: string;
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any;
 };
 
@@ -36,7 +37,9 @@ export const AuthContext = createContext({} as AuthContextType);
 
 const msalInstance = new PublicClientApplication(msalConfig as Configuration);
 
-export function AuthProvider({ children }: AuthContextProviderProps) {
+export function AuthProvider({
+  children,
+}: AuthContextProviderProps): JSX.Element {
   const [accountInfo, setAccountInfo] = useState<accountType>();
 
   const getAccessToken = async (scopes: string[]) => {

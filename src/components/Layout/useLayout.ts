@@ -1,4 +1,4 @@
-import { alpha, Theme, useTheme } from "@mui/material/styles";
+import { alpha, ClassNameMap, Theme, useTheme } from "@mui/material/styles";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -26,7 +26,12 @@ type AppConfigType = {
   };
 };
 
-export function useLayout() {
+export function useLayout(): {
+  config: AppConfigType;
+  classes: ClassNameMap;
+  drawerWidth: number;
+  theme: Theme;
+} {
   const drawerWidth = 230;
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({

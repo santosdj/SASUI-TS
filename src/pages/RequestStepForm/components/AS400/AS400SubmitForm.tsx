@@ -63,27 +63,6 @@ interface IAS400UserRequest {
   copy_user_id_status: string;
 }
 
-interface IAS400Profile {
-  service_id: string;
-  service_description: string;
-  environment: string;
-  is_new_user: boolean;
-  user_id: string;
-  is_job_postion: boolean;
-  job_position: string;
-  profile_name: string;
-  profile_description: string;
-  is_profile_temporary: boolean;
-  profile_valide_at: Date;
-  profile_expires_at: Date;
-  has_conflict: boolean;
-  restricted_access: boolean;
-}
-
-interface ICreateAS400Request {
-  user: IAS400UserRequest;
-  profiles: IAS400Profile[];
-}
 export default function AS400SubmitForm(): JSX.Element {
   const setRequestType = () => {
     return "AS400";
@@ -245,7 +224,7 @@ export default function AS400SubmitForm(): JSX.Element {
     setFieldValue("data", data);
   }, []);
 
-  const [field, mata] = useField("data");
+  const [field] = useField("data");
   const rows = field.value ? [field.value.user, ...field.value.profiles] : [];
   return (
     <Stack
@@ -266,6 +245,7 @@ export default function AS400SubmitForm(): JSX.Element {
 
           {field.value && (
             <AS400Table
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               rows={rows.map((row: any, index: number) => {
                 return { ...row, id: index };
               })}

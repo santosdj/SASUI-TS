@@ -1,14 +1,10 @@
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@mui/material";
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridRenderCellParams,
-} from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 
 interface IProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rows: any;
   removeProfile: (id: number) => void;
 }
@@ -50,7 +46,7 @@ const columns: GridColDef[] = [
   {
     field: "removeprofileaction",
     headerName: "",
-    renderCell: (params: GridRenderCellParams<any, any, any>) => {
+    renderCell: () => {
       return (
         <Button variant="contained" color="error" startIcon={<DeleteIcon />} />
       );

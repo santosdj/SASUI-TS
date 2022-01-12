@@ -32,7 +32,6 @@ export default function InputEmployee(props: IProps): JSX.Element {
   const {
     label,
     name,
-    labelWithId,
     helperText,
     getOptions,
     setLabelOption,
@@ -40,7 +39,7 @@ export default function InputEmployee(props: IProps): JSX.Element {
   } = props;
 
   const [field, mata] = useField(name);
-  const { setFieldValue, setTouched } = useFormikContext();
+  const { setFieldValue } = useFormikContext();
   const [inputValue, setInputValue] = React.useState(
     setLabelOption(field.value)
   );
@@ -101,7 +100,10 @@ export default function InputEmployee(props: IProps): JSX.Element {
       filterSelectedOptions
       {...field}
       inputValue={inputValue}
-      onChange={(event: any, newValue: IEmployeeData | null) => {
+      onChange={(
+        event: React.SyntheticEvent,
+        newValue: IEmployeeData | null
+      ) => {
         setFieldValue(name, newValue);
         setFieldValue("request.updateEmployee", true);
       }}

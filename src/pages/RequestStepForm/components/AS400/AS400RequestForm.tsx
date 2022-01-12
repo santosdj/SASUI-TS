@@ -89,10 +89,8 @@ export default function AS400RequestForm(): JSX.Element {
     const {
       service_type,
       environment,
-      user_type,
       user_id,
       system,
-      job_position,
       routines,
       is_job_position,
     } = as400;
@@ -137,6 +135,7 @@ export default function AS400RequestForm(): JSX.Element {
           .values()
       );
       // const i = 0;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       uniqueData.sort((a: any, b: any) => a.routine - b.routine);
       const fixId = uniqueData.map((value, index) => {
         // eslint-disable-next-line no-param-reassign

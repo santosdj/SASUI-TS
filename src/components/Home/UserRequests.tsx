@@ -1,10 +1,4 @@
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridRenderCellParams,
-  GridValueGetterParams,
-} from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -18,6 +12,7 @@ interface IProps {
 }
 
 export default function UserRequests({ report, columns }: IProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [rows, setRows] = React.useState<any>();
   const { accountInfo } = useAuth();
   const [isCancelled, setIsCancelled] = React.useState<boolean>(false);

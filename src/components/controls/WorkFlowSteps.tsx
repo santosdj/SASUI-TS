@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -44,7 +45,6 @@ export default function WorkFlowSteps({ request_id }: IProps): JSX.Element {
 
   async function fetchData() {
     const data = await fetchRequestWorkFlow(request_id);
-    console.log("no form", data);
 
     if (!isCancelled) {
       data.forEach((element: any) => {
@@ -74,9 +74,9 @@ export default function WorkFlowSteps({ request_id }: IProps): JSX.Element {
     };
   }, []);
 
-  const isStepOptional = (step: number) => {
-    return true;
-  };
+  //  const isStepOptional = (step: number) => {
+  //  return true;
+  // };
 
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
@@ -97,15 +97,6 @@ export default function WorkFlowSteps({ request_id }: IProps): JSX.Element {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
   };
 
   const handleReset = () => {

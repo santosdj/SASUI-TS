@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { AuthContext } from "../contexts/auth";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

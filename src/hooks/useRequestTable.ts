@@ -99,7 +99,9 @@ function setNumberTableHeader() {
   return header;
 }
 
-export function useRequestTable(headerType: string | "status") {
+export function useRequestTable(headerType: string | "status"): {
+  headCells: IHeadCell[];
+} {
   let headCells: IHeadCell[] = [];
   headCells =
     headerType === "status" ? setStatusTableHeader() : setNumberTableHeader();

@@ -1,15 +1,11 @@
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Button } from "@mui/material";
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridRenderCellParams,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type NewType = any;
+
 interface IProps {
-  rows: any;
+  rows: NewType;
 }
 
 const columns: GridColDef[] = [

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DraftsIcon from "@mui/icons-material/Drafts";
@@ -5,7 +6,6 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { Tabs, Tab, Paper, Box, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { GridColDef } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 
 import UserAprovalRequests from "../components/Home/UserAprovalRequests";

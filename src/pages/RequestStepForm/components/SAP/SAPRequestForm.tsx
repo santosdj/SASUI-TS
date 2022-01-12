@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useFormikContext } from "formik";
 import React from "react";
@@ -11,7 +10,7 @@ import SAPRequestTable from "./SAPRequestTable";
 
 export default function SAPRequestForm(): JSX.Element {
   const JOB_POSITION = "2";
-  const { values, setFieldValue, isValid, errors } =
+  const { values, setFieldValue, isValid } =
     useFormikContext<IRequestEmployee>();
 
   const { request, sap } = values;

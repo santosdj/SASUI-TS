@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 import sapicon from "../../assets/sap2.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     maxWidth: 360,

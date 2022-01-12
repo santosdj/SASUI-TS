@@ -1,11 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 
-import {
-  IEmployee,
-  IRequestEmployee,
-  IRequestSAP,
-  IRequestAS400,
-} from "./Interface";
+import { IEmployee, IRequestSAP, IRequestAS400 } from "./Interface";
 
 const select_object = Yup.object()
   .shape({
@@ -26,18 +22,6 @@ const default_object_shape = Yup.object()
     description: Yup.string().default(""),
   })
   .default({ id: "", description: "" });
-
-const test = (name: string, msg: string) => {
-  return Yup.object()
-    .shape({
-      id: Yup.string().ensure(),
-      description: Yup.string().default(""),
-    })
-    .default({ id: "", description: "" })
-    .test(name, msg, (val: any) => {
-      return val ? !!val.id : false;
-    });
-};
 
 export const INITIAL_EMPLOYEE_FORM_STATE = {
   id: "0",

@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { id } from "date-fns/locale";
 import { useField, useFormikContext } from "formik";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import throttle from "lodash/throttle";
@@ -108,6 +107,7 @@ export default function InputAutoComplete(props: IProps): JSX.Element {
       }}
       fullWidth
       multiple={false}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onChange={(event: any, newValue: ISelectData | null) => {
         setOptions(newValue ? [newValue, ...options] : options);
         console.log("chamando o onchange pai");

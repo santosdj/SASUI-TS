@@ -4,7 +4,6 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SendIcon from "@mui/icons-material/Send";
 import { Button, CircularProgress, Grid } from "@mui/material";
-import Box from "@mui/material/Box";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
@@ -51,7 +50,7 @@ export function FormikStepper({
         }
       }}
     >
-      {({ isSubmitting, values, errors, status }) => (
+      {({ isSubmitting, status }) => (
         <Form autoComplete="off">
           <Stepper
             alternativeLabel

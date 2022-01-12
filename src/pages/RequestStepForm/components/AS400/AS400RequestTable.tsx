@@ -8,7 +8,6 @@ import {
   DataGrid,
   GridCellParams,
   GridColDef,
-  GridRenderCellParams,
   GridValueGetterParams,
   GridToolbarContainer,
   GridSelectionModel,
@@ -21,6 +20,7 @@ import * as as400RequestServices from "../../../../services/data/AS400RequestSer
 import { IRequestEmployee } from "../Interface";
 
 interface IProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rows: any;
   removeProfile: (id: number[]) => void;
   updateProfile: (
@@ -89,7 +89,7 @@ const columns: GridColDef[] = [
   {
     field: "removeprofileaction",
     headerName: "",
-    renderCell: (params: GridRenderCellParams<any, any, any>) => {
+    renderCell: () => {
       return (
         <Button variant="contained" color="error" startIcon={<DeleteIcon />} />
       );
@@ -117,14 +117,14 @@ interface IToolBarProps {
 
 function CustomToolbar(props: IToolBarProps) {
   const { selectionModel, removeProfile, updateProfile, addProfiles } = props;
-  const { values, setFieldValue, isValid, errors } =
-    useFormikContext<IRequestEmployee>();
+  const { values, setFieldValue } = useFormikContext<IRequestEmployee>();
 
   const handleDeleteClick = () => {
     const ids = selectionModel.map((value) => parseInt(value.toString(), 10));
     removeProfile(ids);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const checkFieldNotNull = (field: any) => {
     if (!field) return false;
     if (field.id === "") return false;
@@ -144,6 +144,7 @@ function CustomToolbar(props: IToolBarProps) {
         )
           updateProfile(ids, company.id, [branch.id], [region.id]);
         else {
+          // eslint-disable-next-line no-alert
           window.alert("Informe a empresa, filial e região");
         }
       } else {
@@ -160,6 +161,7 @@ function CustomToolbar(props: IToolBarProps) {
       checkFieldNotNull(region)
     )
       addProfiles(company.id, [branch.id], [region.id], access);
+    // eslint-disable-next-line no-alert
     else window.alert("Informe a empresa, filial e região");
   };
 

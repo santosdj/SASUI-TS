@@ -1,4 +1,3 @@
-import { TextField, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useFormikContext } from "formik";
 import React from "react";
@@ -8,15 +7,8 @@ import * as employeeservice from "../../../../services/data/EmployeeService";
 import * as requestServices from "../../../../services/data/RequestServices";
 import { IRequestEmployee } from "../Interface";
 
-interface IRequestFormProps {
-  showTabs: boolean;
-  setShowTabs: React.Dispatch<boolean>;
-  handleShowTabs: (newValue: boolean) => void;
-}
-
 export default function EmployeeForm(): JSX.Element {
-  const { values, setValues, setFieldValue, errors, isValid, isValidating } =
-    useFormikContext<IRequestEmployee>();
+  const { values, setValues } = useFormikContext<IRequestEmployee>();
 
   const { request } = values;
 
