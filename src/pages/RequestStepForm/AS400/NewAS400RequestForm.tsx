@@ -41,7 +41,7 @@ export function NewAS400RequestForm(): JSX.Element {
               body: JSON.stringify(values.data),
             };
             const response = await fetch(
-              "http://localhost:3333/requests/as400",
+              `${process.env.REACT_APP_API_SAS_URL}/requests/as400`,
               requestOptions
             );
             const data = await response.json();

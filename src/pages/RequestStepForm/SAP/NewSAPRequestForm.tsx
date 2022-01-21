@@ -41,7 +41,7 @@ export function NewSAPRequestForm(): JSX.Element {
               body: JSON.stringify(values.data),
             };
             const response = await fetch(
-              "http://localhost:3333/requests/sap",
+              `${process.env.REACT_APP_API_SAS_URL}/requests/sap`,
               requestOptions
             );
             const data = await response.json();
