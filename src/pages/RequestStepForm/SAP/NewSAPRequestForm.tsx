@@ -7,6 +7,7 @@ import {
   FormikStep,
   FormikStepper,
 } from "../../../components/controlsformik/Form/FormikStepper";
+import RequestService from "../../../services/request.service";
 import EmployeeForm from "../components/Employee/EmployeeForm";
 import SAPRequestForm from "../components/SAP/SAPRequestForm";
 import SAPSubmitForm from "../components/SAP/SAPSubmitForm";
@@ -34,6 +35,7 @@ export function NewSAPRequestForm(): JSX.Element {
           try {
             await sleep(3000);
             console.log("values", values.data);
+            /*
             // POST request using fetch with async/await
             const requestOptions = {
               method: "POST",
@@ -44,7 +46,11 @@ export function NewSAPRequestForm(): JSX.Element {
               `${process.env.REACT_APP_API_SAS_URL}/requests/sap`,
               requestOptions
             );
-            const data = await response.json();
+            const data = await response.json(); */
+
+            const response = await RequestService.sendSAPRequest(values.data);
+            const { data } = response;
+
             // check for error response
             if (!response.ok) {
               // get error message from body or default to response status

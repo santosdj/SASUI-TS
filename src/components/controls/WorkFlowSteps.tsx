@@ -8,7 +8,7 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-import { fetchRequestWorkFlow } from "../../services/data/RequestServices";
+import RequestService from "../../services/request.service";
 import WorkflowResponsableTable from "./WorkflowResponsableTable";
 
 interface IProps {
@@ -44,7 +44,7 @@ export default function WorkFlowSteps({ request_id }: IProps): JSX.Element {
   const [skipped, setSkipped] = React.useState(new Set<number>());
 
   async function fetchData() {
-    const data = await fetchRequestWorkFlow(request_id);
+    const data = await RequestService.getRequestWorkFlow(request_id);
 
     if (!isCancelled) {
       data.forEach((element: any) => {

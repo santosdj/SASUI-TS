@@ -14,13 +14,9 @@ export default function SignIn(): JSX.Element {
   const history = useHistory();
 
   async function mySignIn() {
-    const accessToken = localStorage.getItem("@AzureAd:accessToken");
+    await signInWithAD();
 
-    if (!accessToken) {
-      console.log("logando");
-      await signInWithAD();
-    }
-    history.replace("/home");
+    // history.replace("/home");
   }
 
   const useStyles = makeStyles((theme: Theme) =>

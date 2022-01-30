@@ -15,5 +15,9 @@ export const msalConfig: Configuration = {
 };
 
 export const loginRequest = {
+  scopes: [`${process.env.REACT_APP_CLIENT_ID}/.default`],
+};
+
+export const loginRequest2 = {
   scopes: ["user.read"],
 };

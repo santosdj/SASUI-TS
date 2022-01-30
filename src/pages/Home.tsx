@@ -17,14 +17,8 @@ import {
 import UserRequests from "../components/Home/UserRequests";
 import UserTodoRequests from "../components/Home/UserTodoRequests";
 import { useAuth } from "../hooks/useAuth";
-
-interface IUserRequestCount {
-  draft: number;
-  open: number;
-  closed: number;
-  aproving: number;
-  executing: number;
-}
+import RequestService from "../services/request.service";
+import { IUserRequestCount } from "../utils/interfaces/home.interfaces";
 
 interface ITabPanelProps {
   // eslint-disable-next-line react/require-default-props
@@ -61,11 +55,7 @@ export function Home(): JSX.Element {
 
   async function fetchData() {
     const user = accountInfo?.user.displayName;
-    const userCount = await (
-      await fetch(`${process.env.REACT_APP_API_SAS_URL}/requests/count/${user}`)
-    ).json();
-    console.log(userCount);
-
+    const userCount = await RequestService.getUserRequestCount(user as string);
     setUserRequestCount(userCount);
   }
 
@@ -118,15 +108,19 @@ export function Home(): JSX.Element {
           icon={<CheckCircleOutlineIcon />}
           label={`Encerrados(${userRequestCount?.closed})`}
         />
-        <Tab
-          icon={<AssignmentIndIcon />}
-          label={`Para Aprovar(${userRequestCount?.aproving}
+        {accountInfo?.user.roles.isLider && (
+          <Tab
+            icon={<AssignmentIndIcon />}
+            label={`Para Aprovar(${userRequestCount?.aproving}
         )`}
-        />
-        <Tab
-          icon={<ListAltIcon />}
-          label={`Para Executar(${userRequestCount?.executing})`}
-        />
+          />
+        )}
+        {accountInfo?.user.roles.isExecutor && (
+          <Tab
+            icon={<ListAltIcon />}
+            label={`Para Executar(${userRequestCount?.executing})`}
+          />
+        )}
       </Tabs>
 
       {isLoading && "...loading"}

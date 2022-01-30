@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
-import { fetchRequestsByUser } from "../../services/data/RequestServices";
+import RequestService from "../../services/request.service";
 
 interface IProps {
   report: string;
@@ -25,7 +25,7 @@ export default function UserRequests({ report, columns }: IProps): JSX.Element {
   };
 
   async function fetchData() {
-    const rows = await fetchRequestsByUser(
+    const rows = await RequestService.getUserRequestsByUserId(
       accountInfo?.user.displayName || "",
       report
     );

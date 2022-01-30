@@ -7,6 +7,7 @@ import {
   FormikStep,
   FormikStepper,
 } from "../../../components/controlsformik/Form/FormikStepper";
+import RequestService from "../../../services/request.service";
 import AS400RequestForm from "../components/AS400/AS400RequestForm";
 import AS400SubmitForm from "../components/AS400/AS400SubmitForm";
 import EmployeeForm from "../components/Employee/EmployeeForm";
@@ -34,17 +35,8 @@ export function NewAS400RequestForm(): JSX.Element {
           try {
             await sleep(3000);
             console.log("values", values.data);
-            // POST request using fetch with async/await
-            const requestOptions = {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(values.data),
-            };
-            const response = await fetch(
-              `${process.env.REACT_APP_API_SAS_URL}/requests/as400`,
-              requestOptions
-            );
-            const data = await response.json();
+            const response = await RequestService.sendAS400Request(values.data);
+            const { data } = response;
             // check for error response
             if (!response.ok) {
               // get error message from body or default to response status

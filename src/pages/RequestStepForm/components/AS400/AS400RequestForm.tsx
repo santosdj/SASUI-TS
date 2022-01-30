@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Grid from "@mui/material/Grid";
 import { useFormikContext } from "formik";
 import React from "react";
 
 import Controls from "../../../../components/controlsformik/FormikControls";
-import * as as400RequestServices from "../../../../services/data/AS400RequestServices";
-import { EServiceIds as ServiceId } from "../../../../services/data/AS400RequestServices";
+import {
+  as400Service,
+  EServiceIds as ServiceId,
+} from "../../../../services/as400.service";
 import { IRequestEmployee, IAS400RoutineData } from "../Interface";
 import AS400RequestTable from "./AS400RequestTable";
 
@@ -30,27 +33,42 @@ export default function AS400RequestForm(): JSX.Element {
     branchs: string[],
     regions: string[]
   ) => {
-    const profile = await as400RequestServices.getAS400JobPosition(
+    const profile = await as400Service.getAS400JobPosition(
       as400.job_position.id
     );
-    const rows = profile.map((value, index) => {
-      const item = {
-        id: index,
-        service_type: as400.service_type.id,
-        environment: as400.environment.id,
-        user_id: as400.user_id.id,
-        system: value.system_id,
-        routine: value.routine_id,
-        security_type: value.access_type,
-        security_company: value.company === "XX" ? company : value.company,
-        security_branchs: value.branch === "XXX" ? branchs : value.branch,
-        security_regions: value.region === "XXX" ? regions : "",
-        security_text: "",
-        job_position: as400.job_position.id,
-        access: `${value.inc}${value.exc}${value.alt}`,
-      };
-      return item;
-    });
+    const rows = profile.map(
+      (
+        value: {
+          system_id: any;
+          routine_id: any;
+          access_type: any;
+          company: string;
+          branch: string;
+          region: string;
+          inc: any;
+          exc: any;
+          alt: any;
+        },
+        index: any
+      ) => {
+        const item = {
+          id: index,
+          service_type: as400.service_type.id,
+          environment: as400.environment.id,
+          user_id: as400.user_id.id,
+          system: value.system_id,
+          routine: value.routine_id,
+          security_type: value.access_type,
+          security_company: value.company === "XX" ? company : value.company,
+          security_branchs: value.branch === "XXX" ? branchs : value.branch,
+          security_regions: value.region === "XXX" ? regions : "",
+          security_text: "",
+          job_position: as400.job_position.id,
+          access: `${value.inc}${value.exc}${value.alt}`,
+        };
+        return item;
+      }
+    );
     console.log("new array");
     console.log(rows);
     setFieldValue("as400.table", [...rows]);
@@ -192,7 +210,7 @@ export default function AS400RequestForm(): JSX.Element {
             <Controls.InputSelect
               name="as400.service_type"
               label="Serviço AS400"
-              getOptions={as400RequestServices.getAS400ServiceTypeCollection}
+              getOptions={as400Service.getAS400ServiceTypeCollection}
               labelWithId
               editMode
             />
@@ -202,7 +220,7 @@ export default function AS400RequestForm(): JSX.Element {
               name="as400.environment"
               label="Ambiente"
               labelWithId
-              getOptions={as400RequestServices.getAS400EnvironmentCollection}
+              getOptions={as400Service.getAS400EnvironmentCollection}
               editMode
             />
           </Grid>
@@ -210,22 +228,21 @@ export default function AS400RequestForm(): JSX.Element {
             <Controls.InputSelect
               name="as400.user_type"
               label="Novo Usuário"
-              getOptions={as400RequestServices.getAS400UserTypeCollection}
+              getOptions={as400Service.getAS400UserTypeCollection}
               labelWithId={false}
               editMode
               // editMode={service_type.id !== ServiceId.ExcludeProfile}
             />
           </Grid>
         </Grid>
-        {as400?.service_type?.id !==
-          as400RequestServices.EServiceIds.CopyUser && (
+        {as400?.service_type?.id !== ServiceId.CopyUser && (
           <>
             <Grid container spacing={1}>
               <Grid item xs={2}>
                 <Controls.InputSelect
                   name="as400.is_job_position"
                   label="Indicar Perfil"
-                  getOptions={as400RequestServices.getAS400YesNoCollection}
+                  getOptions={as400Service.getAS400YesNoCollection}
                   labelWithId={false}
                   editMode
                 />
@@ -235,9 +252,7 @@ export default function AS400RequestForm(): JSX.Element {
                   <Controls.InputSelect
                     name="as400.job_position"
                     label="Perfil"
-                    getOptions={
-                      as400RequestServices.getAS400JobPositionCollection
-                    }
+                    getOptions={as400Service.getAS400JobPositionCollection}
                     labelWithId={false}
                     editMode
                   />
@@ -250,7 +265,7 @@ export default function AS400RequestForm(): JSX.Element {
                     <Controls.InputSelect
                       name="as400.system"
                       label="Sistema"
-                      getOptions={as400RequestServices.getAS400SystemCollection}
+                      getOptions={as400Service.getAS400SystemCollection}
                       labelWithId
                       editMode
                     />
@@ -268,7 +283,7 @@ export default function AS400RequestForm(): JSX.Element {
             {as400?.user_type?.id !== "S" && (
               <Controls.InputAutoComplete
                 label="User Id"
-                getOptions={as400RequestServices.getAS400UsersByNameCollection}
+                getOptions={as400Service.getAS400UsersByNameCollection}
                 name="as400.user_id"
                 labelWithId
                 helperText=""
@@ -286,27 +301,26 @@ export default function AS400RequestForm(): JSX.Element {
             )}
           </Grid>
 
-          {as400.service_type?.id ===
-            as400RequestServices.EServiceIds.CopyUser && (
+          {as400.service_type?.id === ServiceId.CopyUser && (
             <Grid item xs={6}>
               <Controls.InputAutoComplete
                 name="as400.user_id_source"
                 label="User Id Origem"
                 labelWithId
-                getOptions={as400RequestServices.getAS400UsersByNameCollection}
+                getOptions={as400Service.getAS400UsersByNameCollection}
                 helperText=""
                 disabledOptions={[as400.user_id]}
               />
             </Grid>
           )}
         </Grid>
-        {as400.service_type?.id !== as400RequestServices.EServiceIds.CopyUser &&
+        {as400.service_type?.id !== ServiceId.CopyUser &&
           as400.is_job_position?.id === "N" && (
             <Grid container spacing={1}>
               <Grid item xs={11}>
                 <Controls.CheckBoxAutoComplete
                   label="Rotina"
-                  getOptions={as400RequestServices.getAS400RoutineCollection}
+                  getOptions={as400Service.getAS400RoutineCollection}
                   name="as400.routines"
                   labelWithId
                   helperText=""
@@ -317,23 +331,22 @@ export default function AS400RequestForm(): JSX.Element {
           )}
       </Grid>
 
-      {as400?.service_type &&
-        as400.service_type.id !== as400RequestServices.EServiceIds.CopyUser && (
-          <>
-            <Grid item xs={12}>
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <AS400RequestTable
-                    rows={as400.table}
-                    removeProfile={handleInputAS400TableItemRemoval}
-                    updateProfile={handleUpdateAS400Table}
-                    addProfiles={handleAddAS400Table}
-                  />
-                </Grid>
+      {as400?.service_type && as400.service_type.id !== ServiceId.CopyUser && (
+        <>
+          <Grid item xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <AS400RequestTable
+                  rows={as400.table}
+                  removeProfile={handleInputAS400TableItemRemoval}
+                  updateProfile={handleUpdateAS400Table}
+                  addProfiles={handleAddAS400Table}
+                />
               </Grid>
             </Grid>
-          </>
-        )}
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 }

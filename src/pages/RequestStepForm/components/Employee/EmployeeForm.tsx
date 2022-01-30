@@ -3,8 +3,7 @@ import { useFormikContext } from "formik";
 import React from "react";
 
 import Controls from "../../../../components/controlsformik/FormikControls";
-import * as employeeservice from "../../../../services/data/EmployeeService";
-import * as requestServices from "../../../../services/data/RequestServices";
+import EmployeeService from "../../../../services/employee.service";
 import { IRequestEmployee } from "../Interface";
 
 export default function EmployeeForm(): JSX.Element {
@@ -33,7 +32,7 @@ export default function EmployeeForm(): JSX.Element {
   React.useEffect(() => {
     async function updateForm(id: string) {
       console.log(`loading new values ${id}`);
-      const employee = await employeeservice.getEmployeeValues(id);
+      const employee = await EmployeeService.getEmployeeValues(id);
       console.log(employee);
 
       const newValues: IRequestEmployee = {
@@ -67,9 +66,9 @@ export default function EmployeeForm(): JSX.Element {
                 label="Colaborador"
                 labelWithId={false}
                 helperText="Digite o nome do colaborador"
-                getOptions={requestServices.getEmployeeByNameCollection}
-                setLabelOption={requestServices.setEmployeeNameOption}
-                setLabelHintOptions={requestServices.setEmployeeHintNameOptions}
+                getOptions={EmployeeService.getEmployeeByNameCollection}
+                setLabelOption={EmployeeService.setEmployeeNameOption}
+                setLabelHintOptions={EmployeeService.setEmployeeHintNameOptions}
               />
             </Grid>
             <Grid item xs={4}>
@@ -85,7 +84,7 @@ export default function EmployeeForm(): JSX.Element {
               <Controls.InputSelect
                 name="request.employee_type"
                 label="Tipo"
-                getOptions={requestServices.getEmployeeTypeCollection}
+                getOptions={EmployeeService.getEmployeeTypeCollection}
                 labelWithId={false}
                 editMode={canEditEmployeeFields()}
               />
@@ -97,7 +96,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_role"
                 label="Cargo"
                 labelWithId
-                getOptions={requestServices.getRoleCollection}
+                getOptions={EmployeeService.getRoleCollection}
                 editMode={canEditEmployeeFields()}
               />
             </Grid>
@@ -106,7 +105,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_costcenter"
                 label="Centro de Custo"
                 labelWithId
-                getOptions={requestServices.getCostCenterCollection}
+                getOptions={EmployeeService.getCostCenterCollection}
                 editMode={canEditEmployeeFields()}
               />
             </Grid>
@@ -117,7 +116,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_manager"
                 label="Gestor"
                 labelWithId={false}
-                getOptions={requestServices.getManagerCollection}
+                getOptions={EmployeeService.getManagerCollection}
                 editMode={canEditManagerField()}
               />
             </Grid>
@@ -151,12 +150,12 @@ export default function EmployeeForm(): JSX.Element {
               <Controls.InputEmployee
                 name="request.employee"
                 label="Email"
-                getOptions={requestServices.getEmployeeByNameCollection}
+                getOptions={EmployeeService.getEmployeeByNameCollection}
                 labelWithId={false}
                 helperText="Digite um email"
-                setLabelOption={requestServices.setEmployeeEmailOption}
+                setLabelOption={EmployeeService.setEmployeeEmailOption}
                 setLabelHintOptions={
-                  requestServices.setEmployeeHintEmailOptions
+                  EmployeeService.setEmployeeHintEmailOptions
                 }
               />
             </Grid>
@@ -165,7 +164,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_plataform"
                 label="Plataforma"
                 labelWithId={false}
-                getOptions={requestServices.getPlataformCollection}
+                getOptions={EmployeeService.getPlataformCollection}
                 editMode={canEditEmployeeFields()}
               />
             </Grid>
@@ -176,7 +175,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_company"
                 label="Empresa"
                 labelWithId
-                getOptions={requestServices.getCompanyOnlyCollection}
+                getOptions={EmployeeService.getCompanyOnlyCollection}
                 onChangeCleanFieldName="employee_branch"
                 editMode={canEditEmployeeFields()}
               />
@@ -186,7 +185,7 @@ export default function EmployeeForm(): JSX.Element {
                 name="request.employee_branch"
                 label="Filial"
                 labelWithId
-                getOptions={requestServices.getCompanyBranchCollection}
+                getOptions={EmployeeService.getCompanyBranchCollection}
                 optionsPrimaryKey={
                   request.employee_company
                     ? request.employee_company.id

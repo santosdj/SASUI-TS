@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import EnhancedTable from "../components/Table";
 import { useRequestTable, RequestType } from "../hooks/useRequestTable";
-import { fetchRequestList } from "../services/data/RequestServices";
+import RequestService from "../services/request.service";
 
 type RequestsParams = {
   orderby: string;
@@ -15,7 +15,7 @@ export function Requests(): JSX.Element {
   const headCells = useRequestTable(params.orderby);
 
   async function fetchData() {
-    const data = await fetchRequestList();
+    const data = await RequestService.getRequestList();
     setRequests(data);
   }
 

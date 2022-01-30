@@ -7,7 +7,7 @@ import throttle from "lodash/throttle";
 import * as React from "react";
 
 import { ISelectData } from "../../pages/RequestStepForm/components/Interface";
-import * as sapRequestServices from "../../services/data/SAPRequestServices";
+import { sapService } from "../../services/sap.service";
 
 interface IProps {
   name: string;
@@ -55,7 +55,7 @@ export default function InputSAPProfiles({
           request: { input: string },
           callback: (results?: readonly ISelectData[]) => void
         ) => {
-          const data = await sapRequestServices.getSAProfileCollection(
+          const data = await sapService.getSAProfileCollection(
             parentValue,
             request.input,
             "20"

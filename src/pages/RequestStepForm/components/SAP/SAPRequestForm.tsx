@@ -3,8 +3,10 @@ import { useFormikContext } from "formik";
 import React from "react";
 
 import Controls from "../../../../components/controlsformik/FormikControls";
-import * as sapRequestServices from "../../../../services/data/SAPRequestServices";
-import { EServiceIds as ServiceId } from "../../../../services/data/SAPRequestServices";
+import {
+  sapService,
+  EServiceIds as ServiceId,
+} from "../../../../services/sap.service";
 import { ISelectData, IRequestEmployee } from "../Interface";
 import SAPRequestTable from "./SAPRequestTable";
 
@@ -167,7 +169,7 @@ export default function SAPRequestForm(): JSX.Element {
                 name="sap.environment"
                 label="Ambiente SAP"
                 labelWithId={false}
-                getOptions={sapRequestServices.getSAPEnvironmentCollection}
+                getOptions={sapService.getSAPEnvironmentCollection}
                 editMode
               />
             </Grid>
@@ -176,7 +178,7 @@ export default function SAPRequestForm(): JSX.Element {
                 name="sap.service_type"
                 label="Tipo Serviço"
                 labelWithId
-                getOptions={sapRequestServices.getSAPServiceTypeCollection}
+                getOptions={sapService.getSAPServiceTypeCollection}
                 optionsPrimaryKey={
                   sap &&
                   sap.environment &&
@@ -197,7 +199,7 @@ export default function SAPRequestForm(): JSX.Element {
                     name="sap.profile_type"
                     label="Tipo Perfil"
                     labelWithId={false}
-                    getOptions={sapRequestServices.getSAPProfileTypeCollection}
+                    getOptions={sapService.getSAPProfileTypeCollection}
                     editMode={request.has_sap_job_positions}
                   />
                 </Grid>
@@ -219,9 +221,7 @@ export default function SAPRequestForm(): JSX.Element {
                         name="sap.is_temporary"
                         label="Temporário"
                         labelWithId={false}
-                        getOptions={
-                          sapRequestServices.getSAPTemporyFieldCollection
-                        }
+                        getOptions={sapService.getSAPTemporyFieldCollection}
                         editMode
                       />
                     </Grid>
@@ -291,7 +291,7 @@ export default function SAPRequestForm(): JSX.Element {
                 name="sap.user_type"
                 label="Usuario"
                 labelWithId={false}
-                getOptions={sapRequestServices.getSAPUserTypeCollection}
+                getOptions={sapService.getSAPUserTypeCollection}
                 optionsPrimaryKey={sap?.service_type?.id}
                 editMode={sap?.environment?.id !== "ECC"}
               />
@@ -301,7 +301,7 @@ export default function SAPRequestForm(): JSX.Element {
                 name="sap.user_id"
                 label="User ID"
                 labelWithId
-                getOptions={sapRequestServices.getSAPUserIdCollection}
+                getOptions={sapService.getSAPUserIdCollection}
                 optionsPrimaryKey={sap?.environment?.id}
                 editMode={
                   sap?.environment?.id !== "ECC" && sap?.user_type?.id !== "S"

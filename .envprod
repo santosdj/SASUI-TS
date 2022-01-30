@@ -1,0 +1,5 @@
+REACT_APP_CLIENT_ID_="be082199-a09f-429c-960a-209a6f2a4652"
+REACT_APP_TENANT_ID="40a64d0b-f2f9-4a34-b1b3-0992ac0e5e4e"
+REACT_APP_REDIRECT_URL="https://sasdev.maktubservicos.com.br/signin"
+REACT_APP_KNOWNAUTHORITIES="login.microsoftonline.com"
+REACT_APP_API_SAS_URL='https://sasdev.maktubservicos.com.br/api'

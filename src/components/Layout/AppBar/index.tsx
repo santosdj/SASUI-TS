@@ -118,6 +118,11 @@ export default function MenuNavigator(): JSX.Element {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const handleShowAccount = (event: React.MouseEvent<HTMLElement>) => {
+    window.alert(accountInfo);
+    console.log(accountInfo);
+  };
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -156,6 +161,9 @@ export default function MenuNavigator(): JSX.Element {
         </Button>
         <Button size="small" color="primary" onClick={handleMenuClose}>
           Fechar
+        </Button>
+        <Button size="small" color="primary" onClick={handleShowAccount}>
+          AccountDetails
         </Button>
       </CardActions>
     </Card>

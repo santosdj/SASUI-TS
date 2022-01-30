@@ -16,7 +16,7 @@ import { useFormikContext } from "formik";
 import * as React from "react";
 
 import Controls from "../../../../components/controlsformik/FormikControls";
-import * as as400RequestServices from "../../../../services/data/AS400RequestServices";
+import { as400Service } from "../../../../services/as400.service";
 import { IRequestEmployee } from "../Interface";
 
 interface IProps {
@@ -180,7 +180,7 @@ function CustomToolbar(props: IToolBarProps) {
                 name="as400.company"
                 label="Empresa"
                 labelWithId
-                getOptions={as400RequestServices.getCompanyOnlyCollection}
+                getOptions={as400Service.getCompanyOnlyCollection}
                 editMode
               />
             </Grid>
@@ -189,7 +189,7 @@ function CustomToolbar(props: IToolBarProps) {
                 label="Filial"
                 name="as400.branch"
                 labelWithId
-                getOptions={as400RequestServices.getBranchOnlyCollection}
+                getOptions={as400Service.getBranchOnlyCollection}
                 optionsPrimaryKey={values.as400.company.id}
                 editMode
               />
@@ -199,7 +199,7 @@ function CustomToolbar(props: IToolBarProps) {
                 name="as400.region"
                 label="Região"
                 labelWithId
-                getOptions={as400RequestServices.getRegionCollection}
+                getOptions={as400Service.getRegionCollection}
                 editMode
               />
             </Grid>

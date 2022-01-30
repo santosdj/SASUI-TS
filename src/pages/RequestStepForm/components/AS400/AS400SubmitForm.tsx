@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import { useField, useFormikContext } from "formik";
 import React from "react";
 
-import { EServiceIds } from "../../../../services/data/AS400RequestServices";
+import { EServiceIds } from "../../../../services/as400.service";
 import AS400Table from "../../../Request/components/AS400Table";
 import { IRequestEmployee } from "../Interface";
 

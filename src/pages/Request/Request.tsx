@@ -3,7 +3,7 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 
 import WorkFlowSteps from "../../components/controls/WorkFlowSteps";
-import { fetchRequestsById } from "../../services/data/RequestServices";
+import RequestService from "../../services/request.service";
 import AS400Table from "./components/AS400Table";
 import EmployeeForm from "./components/EmployeeForm";
 import SAPTable from "./components/SAPTable";
@@ -18,7 +18,7 @@ export function Request(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [initialData, setInitialData] = React.useState<any>();
   async function fetchData() {
-    const data = await fetchRequestsById(params.id);
+    const data = await RequestService.getRequestById(params.id);
     console.log("no form", data);
     if (!isCancelled) {
       setInitialData(data);
